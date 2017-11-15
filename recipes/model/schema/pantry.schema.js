@@ -7,10 +7,6 @@ var pantrySchema = mongoose.Schema({
     ingredients: [{
         name: String,
         quantity: Number,
-    }],
-    shared: [{
-        type: mongoose.Schema.Types.ObjectId,
-        rel: "User"
     }]
 }, {collection: "pantry"});
 module.exports = pantrySchema;
