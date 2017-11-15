@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 var userSchema = require("./schema/user.schema");
-var db = require("../database");
+var db = require("../../app");
 var userModel = mongoose.model("UserModel", userSchema);
 
 userModel.createUser = function (user) {
@@ -21,6 +21,6 @@ userModel.deleteUser = function (id) {
 
 userModel.findByCredentials = function (username, password) {
     return userModel.find({username:username, password:password});
-}
+};
 
 module.exports = userModel;
