@@ -19,4 +19,8 @@ userModel.deleteUser = function (id) {
     return userModel.findByIdAndRemove(id);
 };
 
+userModel.findByCredentials = function (username, password) {
+    return userModel.find({username:username, password:password});
+}
+
 module.exports = userModel;
