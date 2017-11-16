@@ -27,6 +27,18 @@
 * ingredients: [(name: String, quantity: Number)]
 * shared: [userId] (same thing, don't modify on client)
 
+## Recipe categories
+
+* GET all categories: `/api/category`
+* GET category by id: `/api/category/<categoryId>`
+* PUT change to category by id and body object: `/api/category/<categoryId>/modify`
+* DELETE category: `/api/category/<categoryId>`
+* POST a new category from body object: `/api/category/create`
+
+### Fields
+* name: String
+* description: String
+
 ## Pantries
 
 * GET pantry for user: `/api/<userId>/pantry`
