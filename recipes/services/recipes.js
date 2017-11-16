@@ -26,7 +26,7 @@ app.delete("/api/:rid", function (req, res) {
     });
 });
 
-app.put("/api/:rid", function (req, res) {
+app.put("/api/:rid/update", function (req, res) {
     recipeModel.updateRecipe(req.params.rid, req.body).then(function () {
         res.send(200);
     });

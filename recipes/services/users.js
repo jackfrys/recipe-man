@@ -20,7 +20,7 @@ app.delete("/api/user/:uid", function (req, res) {
     });
 });
 
-app.put("/api/user/:uid:/update", function (req, res) {
+app.put("/api/user/:uid/update", function (req, res) {
     userModel.updateUser(req.params.uid, req.data).then(function () {
         res.send(200);
     })
