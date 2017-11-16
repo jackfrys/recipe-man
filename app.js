@@ -9,6 +9,8 @@ if (process.env.MONGODB_URI) { // check if running remotely
     var connectionString = process.env.MONGODB_URI;
 }
 
+app.use(bodyParser.json());
+
 var mongoose = require("mongoose");
 mongoose.connect(connectionString);
 mongoose.Promise = q.Promise;
