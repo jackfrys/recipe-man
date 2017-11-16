@@ -9,11 +9,15 @@ var recipeSchema = mongoose.Schema({
     }],
     ingredients: [{
         name: String,
-        quantity: Number,
+        quantity: Number
     }],
     shared: [{
         type: mongoose.Schema.Types.ObjectId,
         rel: "User"
+    }],
+    categories: [{
+        type: mongoose.Schema.Types.ObjectId,
+        rel: "Category"
     }]
 }, {collection: "recipe"});
 module.exports = recipeSchema;

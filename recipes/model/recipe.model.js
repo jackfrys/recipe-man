@@ -22,10 +22,18 @@ recipeModel.updateRecipe = function (recipeId, recipe) {
 
 recipeModel.shareRecipe = function (recipeId, userId) {
     return recipeModel.findByIdAndUpdate(recipeId, {$push:{shared:mongoose.Schema.Types.ObjectId(userId)}});
-}
+};
 
 recipeModel.deleteRecipe = function (recipeId) {
     return recipeModel.findByIdAndRemove(recipeId);
-}
+};
+
+recipeModel.addCategory = function (recipeId, categoryId) {
+    return recipeModel.findByIdAndUpdate(recipeId, {$push:{categories:mongoose.Schema.Types.ObjectId(categoryId)}});
+};
+
+recipeModel.removeCategory = function (recipeId, categoryId) {
+    return recipeModel.findByIdAndUpdate(recipeId, {$pullAll:{categories:mongoose.Schema.Types.ObjectId(categoryId)}});
+};
 
 module.exports = recipeModel;
