@@ -32,4 +32,10 @@ app.put("/api/:rid/update", function (req, res) {
     });
 });
 
+app.post("/api/:rid/share/:uid", function (req, res) {
+    recipeModel.shareRecipe(req.params.rid, req.params.uid).then(function () {
+        res.send(200);
+    });
+});
+
 module.exports = recipeModel;
