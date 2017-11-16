@@ -19,6 +19,7 @@
 * POST new recipe for user from body object: `/api/<userId>/create`
 * DELETE recipe by id: `/api/<recipeId>`
 * PUT recipe by id from body object: `/api/<recipeId>/update`
+* POST a new recipe share: `/api/<recipeId>/share/<userId>`
 
 ### Fields
 * userId (don't modify in or add to JSON object, send via path in API call)
