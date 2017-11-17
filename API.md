@@ -24,6 +24,7 @@
 * DELETE a recipe category: `/api/<recipeId>/category/<categoryId>`
 
 ### Fields
+* titiel : String
 * userId (don't modify in or add to JSON object, send via path in API call)
 * steps: [String]
 * ingredients: [{name: String, quantity: Number}]
