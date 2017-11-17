@@ -24,6 +24,7 @@ var TestModel = mongoose.model("TestModel", TestSchema);
 require("./recipes/services/pantry");
 require("./recipes/services/users");
 require("./recipes/services/recipes");
+require("./recipes/services/category");
 
 app.get("/write/:str", function (req, res) {
     TestModel.create({message:req.params.str}).then(function () {
