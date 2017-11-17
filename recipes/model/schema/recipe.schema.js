@@ -18,6 +18,7 @@ var recipeSchema = mongoose.Schema({
     categories: [{
         type: mongoose.Schema.Types.ObjectId,
         rel: "Category"
-    }]
+    }],
+    title: String
 }, {collection: "recipe"});
 module.exports = recipeSchema;
