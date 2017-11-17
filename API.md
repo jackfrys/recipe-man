@@ -26,7 +26,7 @@
 ### Fields
 * userId (don't modify in or add to JSON object, send via path in API call)
 * steps: [String]
-* ingredients: [(name: String, quantity: Number)]
+* ingredients: [{name: String, quantity: Number}]
 * shared: [userId] (same thing, don't modify on client)
 
 ## Recipe categories
@@ -49,4 +49,4 @@
 
 ### Fields
 * userId (same thing, don't modify on client)
-* ingredients: [(name: String, quantity: Number)]
+* ingredients: [{name: String, quantity: Number}]
