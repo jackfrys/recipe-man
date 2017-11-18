@@ -32,6 +32,7 @@ app.get("/write/:str", function (req, res) {
     })
 });
 
+
 app.get("/read", function (req, res) {
     TestModel.find({}).then(function (data) {
         res.json(data);
