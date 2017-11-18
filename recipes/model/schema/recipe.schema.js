@@ -4,9 +4,7 @@ var recipeSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         rel: "User"
     },
-    steps: [{
-        description: String
-    }],
+    steps: [String],
     ingredients: [{
         name: String,
         quantity: Number

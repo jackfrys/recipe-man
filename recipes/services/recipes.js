@@ -17,6 +17,8 @@ app.get("/api/:uid/shared", function (req, res) {
 app.post("/api/:uid/recipe/create", function (req, res) {
     recipeModel.createRecipe(req.params.uid, req.body).then(function () {
         res.send(200);
+    }).catch(function (err) {
+        res.send(400);
     });
 });
 
