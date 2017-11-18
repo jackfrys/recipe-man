@@ -16,7 +16,7 @@
 
 * GET recipes owned by user: `/api/<userId>/recipes`
 * GET recipes shared with user: `/api/<userId>/shared`
-* POST new recipe for user from body object: `/api/<userId>/create`
+* POST new recipe for user from body object: `/api/<userId>/recipe/create`
 * DELETE recipe by id: `/api/<recipeId>`
 * PUT recipe by id from body object: `/api/<recipeId>/update`
 * POST a new recipe share: `/api/<recipeId>/share/<userId>`
