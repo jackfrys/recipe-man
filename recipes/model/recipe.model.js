@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 var recipeSchema = require("./schema/recipe.schema");
-var db = require("../../app");
+var db = require("database");
 var recipeModel = mongoose.model("RecipeModel", recipeSchema);
 
 recipeModel.createRecipe = function (userId, recipe) {

@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 var pantrySchema = require("./schema/pantry.schema");
-var db = require("../../app");
+var db = require("database");
 var pantryModel = mongoose.model("PantryModel", pantrySchema);
 
 pantryModel.pantryForUser = function (userId) {

@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 var categorySchema = require("./schema/category.schema");
-var db = require("../../app");
+var db = require("database");
 var categoryModel = mongoose.model("CategoryModel", categorySchema);
 
 categoryModel.categoryForId = function (categoryId) {
