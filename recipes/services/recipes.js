@@ -43,6 +43,8 @@ app.post("/api/:rid/share/:uid", function (req, res) {
 app.put("/api/:rid/category/:cid", function (req, res) {
     recipeModel.addCategory(req.params.rid, req.params.cid).then(function () {
         res.send(200);
+    }).catch(function () {
+        res.send(400);
     });
 });
 

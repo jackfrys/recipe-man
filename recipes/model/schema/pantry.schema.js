@@ -8,5 +8,5 @@ var pantrySchema = mongoose.Schema({
         name: String,
         quantity: Number,
     }]
-}, {collection: "pantry"});
+}, {collection: "Pantry"});
 module.exports = pantrySchema;
