@@ -10,26 +10,26 @@ app.get("/api/user/:uid", function (req, res) {
 
 app.post("/api/user/create", function (req, res) {
     userModel.createUser(req.body).then(function () {
-        res.send(200);
+        res.sendStatus(200);
     });
 });
 
 app.delete("/api/user/:uid", function (req, res) {
     userModel.deleteUser(req.params.uid).then(function () {
-        res.send(200);
+        res.sendStatus(200);
     });
 });
 
 app.put("/api/user/:uid/update", function (req, res) {
     userModel.updateUser(req.params.uid, req.data).then(function () {
-        res.send(200);
+        res.sendStatus(200);
     })
 });
 
 app.get("/api/user/:un/:pw", function (req, res) {
     userModel.findByCredentials(req.params.un, req.params.pw).then(function (data) {
         if (data.length == 0) {
-            res.send(400);
+            res.sendStatus(400);
         } else {
             res.json(data);
         }
