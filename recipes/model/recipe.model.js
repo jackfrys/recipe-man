@@ -13,7 +13,7 @@ recipeModel.recipesByUser = function (userId) {
 };
 
 recipeModel.sharedWithUser = function (userId) {
-    return recipeModel.find({shared:{$in:mongoose.Schema.Types.ObjectId(userId)}});
+    return recipeModel.find({shared:{$in:[mongoose.Schema.Types.ObjectId(userId)]}});
 };
 
 recipeModel.updateRecipe = function (recipeId, recipe) {
@@ -34,6 +34,10 @@ recipeModel.addCategory = function (recipeId, categoryId) {
 
 recipeModel.removeCategory = function (recipeId, categoryId) {
     return recipeModel.findByIdAndUpdate(recipeId, {$pullAll:{categories:mongoose.Schema.Types.ObjectId(categoryId)}});
+};
+
+recipeModel.allRecipes = function () {
+    return recipeModel.find({});
 };
 
 module.exports = recipeModel;

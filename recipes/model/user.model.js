@@ -23,4 +23,8 @@ userModel.findByCredentials = function (username, password) {
     return userModel.find({username:username, password:password});
 };
 
+userModel.allUsers = function () {
+    return userModel.find({});
+};
+
 module.exports = userModel;

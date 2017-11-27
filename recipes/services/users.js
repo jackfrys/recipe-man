@@ -36,4 +36,10 @@ app.get("/api/user/:un/:pw", function (req, res) {
     });
 });
 
+app.get("/api/users", function (req, res) {
+    userModel.allUsers().then(function (data) {
+        res.json(data);
+    });
+});
+
 module.exports = userModel;

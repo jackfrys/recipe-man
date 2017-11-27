@@ -20,4 +20,10 @@ app.put("/api/:pid/update", function (req, res) {
     });
 });
 
+app.get("/api/pantries", function (req, res) {
+    pantryModel.allPantries().then(function (data) {
+        res.json(data);
+    });
+});
+
 module.exports = app;

@@ -16,4 +16,8 @@ pantryModel.addPantryForUser = function (userId, pantry) {
     return pantryModel.create(pantry);
 };
 
+pantryModel.allPantries = function () {
+    return pantryModel.get({});
+};
+
 module.exports = pantryModel;

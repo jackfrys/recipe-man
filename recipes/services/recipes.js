@@ -35,9 +35,15 @@ app.put("/api/:rid/update", function (req, res) {
 });
 
 app.post("/api/:rid/share/:uid", function (req, res) {
-    recipeModel.shareRecipe(req.params.rid, req.params.uid).then(function () {
-        res.send(200);
-    });
+    recipeModel.findById(req.params.rid).then(function (data) {
+        data.shared.push(req.params.uid);
+        recipeModel.findByIdAndUpdate(req.params.rid, {$set:data}).then(function () {
+            res.send(200);
+        })
+    })
+    // recipeModel.shareRecipe(req.params.rid, req.params.uid).then(function () {
+    //     res.send(200);
+    // });
 });
 
 app.put("/api/:rid/category/:cid", function (req, res) {
@@ -51,6 +57,12 @@ app.put("/api/:rid/category/:cid", function (req, res) {
 app.delete("/api/:rid/category/:cid", function (req, res) {
     recipeModel.removeCategory(req.params.rid, req.params.cid).then(function () {
         res.send(200);
+    });
+});
+
+app.get("/api/recipes", function (req, res) {
+    recipeModel.allRecipes().then(function (data) {
+        res.json(data);
     });
 });
 
