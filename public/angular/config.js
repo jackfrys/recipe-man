@@ -1,0 +1,24 @@
+(function () {
+    angular
+        .module("RecipeMan")
+        .config(Config);
+
+    function Config($routeProvider) {
+        $routeProvider
+            .when("/", {
+                templateUrl: "views/home.html",
+                controller: "HomeController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid", {
+                templateUrl: "views/user.html",
+                controller: "UserController",
+                controllerAs: "model"
+            })
+            .when("/recipe/:rid", {
+                templateUrl: "views/recipe.html",
+                controller: "RecipeController",
+                controllerAs: "model"
+            });
+    }
+})();

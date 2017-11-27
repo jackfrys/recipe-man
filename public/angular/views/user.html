@@ -1,0 +1,13 @@
+<h1>Credentials</h1>
+Username: {{model.user.username}}
+Password: {{model.user.password}}
+
+<h1>Recipes</h1>
+<div ng-repeat="recipe in model.recipes">
+    <a href="#!/recipe/{{recipe._id}}">{{recipe.title}}</a>
+</div>
+
+<h1>Shared</h1>
+<div ng-repeat="recipe in model.shared">
+    <a href="#!/recipe/{{recipe._id}}">{{recipe.title}}</a>
+</div>
