@@ -1,6 +1,7 @@
 var app = require("../../express");
 var mongoose = require("mongoose");
 var userModel = require("../model/user.model");
+var pantryModel = require("../model/pantry.model");
 
 app.get("/api/user/:uid", function (req, res) {
     userModel.getUser(req.params.uid).then(function (data) {
@@ -9,8 +10,10 @@ app.get("/api/user/:uid", function (req, res) {
 });
 
 app.post("/api/user/create", function (req, res) {
-    userModel.createUser(req.body).then(function () {
-        res.sendStatus(200);
+    userModel.createUser(req.body).then(function (comp) {
+        pantryModel.pantryForUser(comp._id).then(function () {
+            res.sendStatus(200);
+        });
     });
 });
 
