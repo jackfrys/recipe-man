@@ -19,5 +19,9 @@
         $http.get("/api/" + id + "/shared").then(function (res) {
             vm.shared = res.data;
         });
+
+        vm.delete = function () {
+            $http.delete("/api/user/" + id);
+        };
     }
 })();
