@@ -1,3 +1,11 @@
 <div ng-repeat="user in model.users">
-    <a href="#!/user/{{user._id}}">{{user.username}}</a>
+    <a href="#!/user/{{user._id}}">{{user.name}}</a>
 </div>
+
+<form>
+    <input ng-model="model.new.name" placeholder="name">
+    <input ng-model="model.new.email" placeholder="email" type="email">
+    <input ng-model="model.new.username" placeholder="username">
+    <input ng-model="model.new.password" placeholder="password">
+    <button ng-click="model.create()">Create</button>
+</form>

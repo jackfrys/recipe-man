@@ -1,4 +1,4 @@
 (function () {
     angular
-        .module("RecipeMan", ["ngRoute", "textAngular"]);
+        .module("RecipeMan", ["ngRoute"]);
 })();

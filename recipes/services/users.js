@@ -22,9 +22,9 @@ app.delete("/api/user/:uid", function (req, res) {
 });
 
 app.put("/api/user/:uid/update", function (req, res) {
-    userModel.updateUser(req.params.uid, req.data).then(function () {
+    userModel.updateUser(req.params.uid, req.body).then(function () {
         res.sendStatus(200);
-    })
+    });
 });
 
 app.get("/api/user/:un/:pw", function (req, res) {

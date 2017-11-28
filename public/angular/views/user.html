@@ -1,8 +1,14 @@
 <h1>Credentials</h1>
-Username: {{model.user.username}}
-Password: {{model.user.password}}
 
-<a ng-click="model.delete()" href="/">Delete</a>
+<form>
+    <input ng-model="model.user.name" placeholder="name">
+    <input ng-model="model.user.email" placeholder="email" type="email">
+    <input ng-model="model.user.username" placeholder="username">
+    <input ng-model="model.user.password" placeholder="password">
+    <button ng-click="model.update()">Update</button>
+</form>
+
+<a ng-click="model.delete()" href="#!/">Delete</a>
 
 <a href="#!/user/{{model.id}}/pantry">View pantry</a>
 
