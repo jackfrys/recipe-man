@@ -52,4 +52,4 @@
 ### Fields
 * name: String
 * userId (same thing, don't modify on client)
-* ingredients: [{name: String, quantity: Number}]
+* ingredients: [{name: String, quantity: Number, unit: String}]
