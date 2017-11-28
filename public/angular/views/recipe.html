@@ -1,6 +1,10 @@
-{{model.recipe.title}}
-
-<h1>Steps</h1>
-<div ng-repeat="step in model.recipe.steps">
-    {{step}}
+<form>
+    <input ng-model="model.recipe.title">
+</form>
+<div ng-repeat="item in model.recipe.steps">
+    <input ng-model="item.description" placeholder="item"> <button ng-click="model.remove($index)">Remove</button>
 </div>
+
+<button ng-click="model.add()">Add item</button>
+
+<button ng-click="model.update()">Save</button>

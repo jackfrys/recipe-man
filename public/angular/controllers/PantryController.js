@@ -26,6 +26,6 @@
 
         vm.remove = function (item) {
             vm.pantry.ingredients.splice(item, 1);
-        }
+        };
     }
 })();

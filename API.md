@@ -19,7 +19,7 @@
 * GET recipe by id: `/api/recipe/<recipeId>`
 * POST new recipe for user from body object: `/api/<userId>/recipe/create`
 * DELETE recipe by id: `/api/<recipeId>`
-* PUT recipe by id from body object: `/api/<recipeId>/update`
+* PUT recipe by id from body object: `/api/recipe/<recipeId>/update`
 * POST a new recipe share: `/api/<recipeId>/share/<userId>`
 * PUT a new recipe category: `/api/<recipeId>/category/<categoryId>`
 * DELETE a recipe category: `/api/<recipeId>/category/<categoryId>`
