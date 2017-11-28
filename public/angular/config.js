@@ -15,6 +15,11 @@
                 controller: "UserController",
                 controllerAs: "model"
             })
+            .when("/user/:uid/pantry", {
+                templateUrl: "views/pantry.html",
+                controller: "PantryController",
+                controllerAs: "model"
+            })
             .when("/recipe/:rid", {
                 templateUrl: "views/recipe.html",
                 controller: "RecipeController",

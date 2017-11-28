@@ -6,6 +6,7 @@
     function UserController($routeParams, $location, $http) {
         var vm = this;
         var id = $routeParams["uid"];
+        vm.id = id;
 
         $http.get("/api/user/" + id).then(function (res) {
             vm.user = res.data;

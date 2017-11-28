@@ -2,6 +2,8 @@
 Username: {{model.user.username}}
 Password: {{model.user.password}}
 
+<a href="#!/user/{{model.id}}/pantry">View pantry</a>
+
 <h1>Recipes</h1>
 <div ng-repeat="recipe in model.recipes">
     <a href="#!/recipe/{{recipe._id}}">{{recipe.title}}</a>
