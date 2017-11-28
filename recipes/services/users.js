@@ -11,9 +11,7 @@ app.get("/api/user/:uid", function (req, res) {
 
 app.post("/api/user/create", function (req, res) {
     userModel.createUser(req.body).then(function (comp) {
-        pantryModel.pantryForUser(comp._id).then(function () {
-            res.sendStatus(200);
-        });
+        res.sendStatus(200);
     });
 });
 

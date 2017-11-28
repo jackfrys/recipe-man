@@ -46,9 +46,10 @@
 ## Pantries
 
 * GET pantry for user: `/api/<userId>/pantry`
-* POST pantry for user from body object (only do this once per user): `/api/<userId>/pantry/add`
+* POST new pantry for user from body object: `/api/<userId>/pantry/add`
 * PUT pantry by id from body object: `/api/<pantryId>/update`
 
 ### Fields
+* name: String
 * userId (same thing, don't modify on client)
 * ingredients: [{name: String, quantity: Number}]

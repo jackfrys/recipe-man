@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var pantrySchema = mongoose.Schema({
+    name: String,
     user: {
         type: mongoose.Schema.Types.ObjectId,
         rel: "User"
