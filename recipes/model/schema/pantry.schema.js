@@ -8,6 +8,7 @@ var pantrySchema = mongoose.Schema({
     ingredients: [{
         name: String,
         quantity: Number,
+        unit: String
     }]
 }, {collection: "Pantry"});
 module.exports = pantrySchema;
