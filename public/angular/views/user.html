@@ -8,9 +8,15 @@
     <button ng-click="model.update()">Update</button>
 </form>
 
-<a ng-click="model.delete()" href="#!/">Delete</a>
+<button ng-click="model.delete()" href="#!/">Delete</button>
 
-<a href="#!/user/{{model.id}}/pantry">View pantry</a>
+<button href="#!/user/{{model.id}}/pantry">View pantry</button>
+
+<h1>Pantries</h1>
+<div ng-repeat="pantry in model.pantries">
+    <a href="#!/pantry/{{pantry._id}}">{{pantry.name}}</a>
+</div>
+<button ng-click="model.createPantry()">Create new Pantry</button>
 
 <h1>Recipes</h1>
 <div ng-repeat="recipe in model.recipes">

@@ -20,6 +20,12 @@ app.put("/api/:pid/update", function (req, res) {
     });
 });
 
+app.get("/api/pantry/:pid", function (req, res) {
+    pantryModel.findById(req.params.pid).then(function (data) {
+        res.json(data);
+    });
+});
+
 app.get("/api/pantries", function (req, res) {
     pantryModel.allPantries().then(function (data) {
         res.json(data);

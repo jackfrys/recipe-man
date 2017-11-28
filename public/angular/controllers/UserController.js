@@ -21,16 +21,26 @@
                 vm.shared = res.data;
             });
 
-            vm.delete = function () {
-                $http.delete("/api/user/" + id);
-            };
+            $http.get("/api/" + id + "/pantry").then(function (res) {
+                vm.pantries = res.data;
+            });
         }
-        init()
+        init();
+
+        vm.delete = function () {
+            $http.delete("/api/user/" + id);
+        };
 
         vm.update = function () {
             $http.put("/api/user/" + id + "/update", vm.user).then(function () {
-                init()
-            })
-        }
+                init();
+            });
+        };
+
+        vm.createPantry = function () {
+            $http.post("/api/" + id + "/pantry/add", {name:"My new Pantry"}).then(function () {
+                init();
+            });
+        };
     }
 })();

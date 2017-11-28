@@ -1,3 +1,8 @@
-<div ng-repeat="item in model.pantry">
+<form>
+    <input ng-model="model.pantry.name">
+</form>
+<div ng-repeat="item in model.pantry.ingreedients">
     {{item.name}}, {{item.quantity}}, {{item.q_label}}
 </div>
+
+<button ng-click="model.update()">Update</button>

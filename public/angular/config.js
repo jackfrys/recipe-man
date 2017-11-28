@@ -15,7 +15,7 @@
                 controller: "UserController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/pantry", {
+            .when("/pantry/:pid", {
                 templateUrl: "views/pantry.html",
                 controller: "PantryController",
                 controllerAs: "model"
