@@ -35,7 +35,7 @@
 
 ## Recipe categories
 
-* GET all categories: `/api/category`
+* GET all categories: `/api/categories`
 * GET category by id: `/api/category/<categoryId>`
 * PUT change to category by id and body object: `/api/category/<categoryId>/modify`
 * DELETE category: `/api/category/<categoryId>`
