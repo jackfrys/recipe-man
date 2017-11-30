@@ -4,12 +4,12 @@ var db = require("./database");
 var recipeModel = mongoose.model("RecipeModel", recipeSchema);
 
 recipeModel.createRecipe = function (userId, recipe) {
-    recipe.user = mongoose.Schema.Types.ObjectId(userId);
+    recipe.user = userId;
     return recipeModel.create(recipe);
 };
 
 recipeModel.recipesByUser = function (userId) {
-    return recipeModel.find({user:mongoose.Schema.Types.ObjectId(userId)});
+    return recipeModel.find({user:userId});
 };
 
 recipeModel.sharedWithUser = function (userId) {

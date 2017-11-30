@@ -18,5 +18,5 @@ var recipeSchema = mongoose.Schema({
         rel: "Category"
     }],
     title: String
-}, {collection: "Eecipe"});
+}, {collection: "Recipe"});
 module.exports = recipeSchema;
