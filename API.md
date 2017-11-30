@@ -23,6 +23,8 @@
 * POST a new recipe share: `/api/<recipeId>/share/<userId>`
 * PUT a new recipe category: `/api/<recipeId>/category/<categoryId>`
 * DELETE a recipe category: `/api/<recipeId>/category/<categoryId>`
+* GET whether a recipe can be made with a pantry: `/api/recipe/<recipeId>/complete/<pantryId>'
+* POST that a recipe has beem made with a pantry: `/api/recipe/<recipeId>/complete/<pantryId>'
 
 ### Fields
 * title : String
