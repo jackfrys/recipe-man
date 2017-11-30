@@ -2,55 +2,98 @@ import React, {Component} from 'react';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 
 
-const example_recipe = {
-    title: "Eggs",
-    steps: ["Make eggs", "Eat Eggs"],
-    ingredients: [
-        {
-            name: "eggs",
-            quanitity: 3,
-            q_label: ""
-        },
-        {
-            name: "cheese",
-            quanitity: "1",
-            q_label: "cups"
-        }
-    ]
-}
+class Recipe extends Component {
 
 
-function displayIngredients() {
+    deleteRecipe() {
 
-    let result = [];
+        console.log(this.props.recipe._id);
 
-    for (let x = 0; x < example_recipe.ingredients.length; x++) {
-        result.push(
-            <p>
-                {example_recipe.ingredients[x].quanitity} {example_recipe.ingredients[x].q_label} {example_recipe.ingredients[x].name}
-            </p>
-        )
+        alert('are you sure?');
+
+        fetch(`https://recipe-man-db.herokuapp.com/api/${this.props.recipe._id}`, {
+            method: "DELETE"
+        })
+        .then(results => {
+            console.log(results)
+        }).catch(function(error) {
+            console.log(error);
+        });
+
+
+
     }
 
-    return result;
-}
+    displaySteps() {
 
-class Recipe extends Component {
+        let result = [];
+
+        for (let x = 0; x < this.props.recipe.steps.length; x++) {
+            result.push(
+                <p>
+                    {x + 1}. {this.props.recipe.steps[x]}
+                </p>
+            )
+        }
+
+        return result;
+    }
+
+    displayIngredients() {
+
+        let result = [];
+
+        for (let x = 0; x < this.props.recipe.ingredients.length; x++) {
+            result.push(
+                <p>
+                    {this.props.recipe.ingredients[x].quantity} {this.props.recipe.ingredients[x].unit} {this.props.recipe.ingredients[x].name}
+                </p>
+            )
+        }
+
+        return result;
+    }
+
+    constructor(props) {
+        super(props);
+
+        this.displayIngredients = this.displayIngredients.bind(this);
+        this.displaySteps = this.displaySteps.bind(this);
+
+        this.setState({
+            "editing": 'False'
+        })
+
+    }
+
     render() {
         return (
             <Card>
                 <CardHeader
-                  title={example_recipe.title}
+                  title={this.props.recipe.title}
                   actAsExpander={true}
                   showExpandableButton={true}
                 />
                 <CardText expandable={true}>
-                     {displayIngredients()}
-                     // displaySteps();
+                    Ingredients:
+                        {this.displayIngredients()}
+                     Steps:
+                        {this.displaySteps()}
+                     <button>
+                        Edit
+                     </button>
+                     <button onClick={this.deleteRecipe.bind(this)}>
+                        Delete
+                     </button>
+                     <button>
+                        Save
+                     </button>
                </CardText>
             </Card>
         );
     }
 }
+
+
 
 export default Recipe;

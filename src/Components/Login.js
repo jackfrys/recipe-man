@@ -29,6 +29,22 @@ class Login extends Component {
         })
     }
 
+    login() {
+        var loginUrl = `https://recipe-man-db.herokuapp.com/api/user/${this.state.username}/${this.state.password}`;
+
+        fetch(loginUrl).then(results => {
+            return results.json();
+        }).then(data => {
+            console.log(data);
+
+            if (data.length > 0) {
+                window.location = '/home/' + data[0]._id;
+            }
+
+        })
+    }
+
+
     render() {
         return (
             <div className="App">
@@ -55,9 +71,14 @@ class Login extends Component {
                         onChange={this.handlePasswordChange}
                     />
                 </form>
+                <button onClick={this.login.bind(this)}>
+                    Login
+                </button>
             </div>
         );
     }
+
+
 }
 
 export default Login;
