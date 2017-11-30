@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Recipe from './Recipe.js'
+import NewRecipeModal from './NewRecipeModal.js'
 
 
 const styles = {
@@ -81,6 +82,7 @@ class Home extends Component {
             <Tabs>
                <Tab label="Recipes">
                  <div>
+                    <NewRecipeModal/>
                     {this.displayRecipes()}
                  </div>
                </Tab>
