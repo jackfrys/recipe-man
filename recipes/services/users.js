@@ -10,8 +10,15 @@ app.get("/api/user/:uid", function (req, res) {
 });
 
 app.post("/api/user/create", function (req, res) {
-    userModel.createUser(req.body).then(function (comp) {
-        res.sendStatus(200);
+    var user = req.body;
+    userModel.findByCredentials(user.username, user.password).then(function (data) {
+        if (data.length == 0) {
+            userModel.createUser(user).then(function (comp) {
+                res.sendStatus(200);
+            });
+        } else {
+            res.sendStatus(400);
+        }
     });
 });
 
