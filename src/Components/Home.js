@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Recipe from './Recipe.js'
 import NewRecipeModal from './NewRecipeModal.js'
 
@@ -19,10 +18,11 @@ class Home extends Component {
 
     constructor(props) {
         super(props);
-        this.setState({
+        this.state = {
             "recipes": []
-        });
+        };
 
+        this.handleIngredientChange = this.handleIngredientChange.bind(this);
         this.displayRecipes = this.displayRecipes.bind(this);
     }
 
@@ -42,32 +42,30 @@ class Home extends Component {
             return results.json();
         }).then(data => {
             var pantry = data;
-            console.log(pantry);
             this.setState({
                 "pantry": pantry
             });
         })
+    }
 
+    handleIngredientChange(recipeIdx, ingredientIdx, field, newVal) {
+        if (!field) {
+            return;
+        }
+        let newState = Object.assign({}, this.state);
+        newState.recipes[recipeIdx]['ingredients'][ingredientIdx][field] = newVal;
+        this.setState(newState);
+        // TODO: Post update to server
     }
 
     displayRecipes() {
-
         let result = [];
-
-        if (this.state) {
-
-            for (let x = 0; x < this.state.recipes.length; x++) {
-                console.log("here");
-
-                result.push(
-                    <Recipe recipe={this.state.recipes[x]}/>
-                )
-            }
-
-            return result;
-        } else {
-            return '';
+        for (let x = 0; x < this.state.recipes.length; x++) {
+            result.push(
+                <Recipe key={x} idx={x} recipe={this.state.recipes[x]} handleIngredientChange={this.handleIngredientChange}/>
+            )
         }
+        return result;
     }
 
 
@@ -75,8 +73,6 @@ class Home extends Component {
     render() {
 
         const id = this.props.match.params.id;
-
-        console.log(this.state);
 
         return (
             <Tabs>
