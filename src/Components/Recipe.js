@@ -39,16 +39,44 @@ class Recipe extends Component {
         return result;
     }
 
+    editRecipe() {
+        console.log("edit")
+        this.setState({
+            "editing": false
+        })
+    }
+
     displayIngredients() {
+
+        console.log("call me");
 
         let result = [];
 
+        let tag = "";
+
         for (let x = 0; x < this.props.recipe.ingredients.length; x++) {
-            result.push(
-                <p>
-                    {this.props.recipe.ingredients[x].quantity} {this.props.recipe.ingredients[x].unit} {this.props.recipe.ingredients[x].name}
-                </p>
-            )
+            if (!this.state.editing) {
+                result.push(
+                    <p>
+                        {this.props.recipe.ingredients[x].quantity} {this.props.recipe.ingredients[x].unit} {this.props.recipe.ingredients[x].name}
+                    </p>
+                )
+            } else {
+                result.push(
+                    <div>
+                        <input>
+                            {this.props.recipe.ingredients[x].quantity}
+                        </input>
+                        <input>
+                         {this.props.recipe.ingredients[x].unit}
+                        </input>
+                        <input>
+                         {this.props.recipe.ingredients[x].name}
+                        </input>
+                    </div>
+
+                )
+            }
         }
 
         return result;
@@ -59,9 +87,11 @@ class Recipe extends Component {
 
         this.displayIngredients = this.displayIngredients.bind(this);
         this.displaySteps = this.displaySteps.bind(this);
+        this.deleteRecipe = this.deleteRecipe.bind(this);
+        this.editRecipe = this.editRecipe.bind(this);
 
         this.setState({
-            "editing": 'False'
+            "editing": false
         })
 
     }
@@ -76,13 +106,13 @@ class Recipe extends Component {
                 />
                 <CardText expandable={true}>
                     Ingredients:
-                        {this.displayIngredients()}
+                        {this.displayIngredients}
                      Steps:
                         {this.displaySteps()}
-                     <button>
+                     <button onClick={this.editRecipe}>
                         Edit
                      </button>
-                     <button onClick={this.deleteRecipe.bind(this)}>
+                     <button onClick={this.deleteRecipe}>
                         Delete
                      </button>
                      <button>
