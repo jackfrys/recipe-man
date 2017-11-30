@@ -28,7 +28,7 @@
 * title : String
 * userId (don't modify in or add to JSON object, send via path in API call)
 * steps: [String]
-* ingredients: [{name: String, quantity: Number, q_label: String}]
+* ingredients: [{name: String, quantity: Number, unit: String}]
 * shared: [userId] (same thing, don't modify on client)
 
 ## Recipe categories

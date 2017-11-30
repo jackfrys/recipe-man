@@ -7,7 +7,8 @@ var recipeSchema = mongoose.Schema({
     steps: [String],
     ingredients: [{
         name: String,
-        quantity: Number
+        quantity: Number,
+        unit: String
     }],
     shared: [{
         type: mongoose.Schema.Types.ObjectId,
