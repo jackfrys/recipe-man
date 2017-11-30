@@ -36,11 +36,7 @@ app.put("/api/user/:uid/update", function (req, res) {
 
 app.get("/api/user/:un/:pw", function (req, res) {
     userModel.findByCredentials(req.params.un, req.params.pw).then(function (data) {
-        if (data.length == 0) {
-            res.sendStatus(400);
-        } else {
-            res.json(data);
-        }
+        res.json(data);
     });
 });
 
