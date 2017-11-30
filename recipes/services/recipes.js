@@ -45,11 +45,8 @@ app.post("/api/:rid/share/:uid", function (req, res) {
         data.shared.push(req.params.uid);
         recipeModel.findByIdAndUpdate(req.params.rid, {$set:data}).then(function () {
             res.send(200);
-        })
-    })
-    // recipeModel.shareRecipe(req.params.rid, req.params.uid).then(function () {
-    //     res.send(200);
-    // });
+        });
+    });
 });
 
 app.put("/api/:rid/category/:cid", function (req, res) {
