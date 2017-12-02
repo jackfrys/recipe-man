@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Recipe from './Recipe.js'
+import Pantry from './Pantry.js'
+import Categories from './Categories.js'
 
 
 const styles = {
@@ -18,9 +20,10 @@ class Home extends Component {
 
     constructor(props) {
         super(props);
-        this.setState({
-            "recipes": []
-        });
+        this.state = {
+            recipes: [],
+            pantry: {}
+        };
 
         this.displayRecipes = this.displayRecipes.bind(this);
     }
@@ -43,7 +46,7 @@ class Home extends Component {
             var pantry = data;
             console.log(pantry);
             this.setState({
-                "pantry": pantry
+                "pantry": pantry[0]
             });
         })
 
@@ -86,19 +89,14 @@ class Home extends Component {
                </Tab>
                <Tab label="Pantry">
                  <div>
-                   <h2 style={styles.headline}>Tab Two</h2>
-                   <p>
-                     This is another example tab. {id}
-                   </p>
+                   <Pantry pantry={this.state.pantry}/>
                  </div>
                </Tab>
                <Tab label="New Recipe">
                  <div>
                    <h2 style={styles.headline}>New Recipe</h2>
-                   <p>
-                     This is another example tab.
-                   </p>
-                 </div>
+                   <Categories />
+                  </div>
                </Tab>
             </Tabs>
         );
