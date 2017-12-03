@@ -49,6 +49,20 @@ class Home extends Component {
                 "pantry": pantry
             });
         })
+
+        console.log("here");
+
+
+        fetch(`https://recipe-man-db.herokuapp.com/api/${this.props.match.params.id}/shared`)
+        .then(results => {
+            return results.json();
+        }).then(data => {
+            let shared = data;
+            this.setState({
+                "shared": shared
+            });
+            console.log(shared);
+        })
     }
 
     handleIngredientChange(recipeIdx, ingredientIdx, field, newVal) {
@@ -107,8 +121,6 @@ class Home extends Component {
         }
         return result;
     }
-
-
 
     render() {
 
