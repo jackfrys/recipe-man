@@ -3,6 +3,7 @@ import {Card, CardTitle, CardText} from 'material-ui/Card';
 import Divider from 'material-ui/Divider';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
+import RaisedButton from 'material-ui/RaisedButton';
 
 
 const style = {
@@ -117,7 +118,7 @@ class Pantry extends Component {
                             underlineShow={false}
                             onChange={this.handleIngredientChange('name')}
                         />
-                        <button onClick={this.addIngredient}> Add</button>
+                        <RaisedButton onClick={this.addIngredient}> Add</RaisedButton>
                     </Paper>
                 </CardText>
             </Card>
