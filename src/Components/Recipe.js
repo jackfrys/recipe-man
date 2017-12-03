@@ -1,9 +1,25 @@
 import React, {Component} from 'react';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
+import RaisedButton from 'material-ui/RaisedButton';
 
 
 class Recipe extends Component {
 
+    constructor(props) {
+        super(props);
+        this.displaySteps = this.displaySteps.bind(this);
+        this.deleteRecipe = this.deleteRecipe.bind(this);
+        this.editRecipe = this.editRecipe.bind(this);
+        this.renderIngredient = this.renderIngredient.bind(this);
+        this.changeIngredientField = this.changeIngredientField.bind(this);
+        this.changeStep = this.changeStep.bind(this);
+        this.renderStep = this.renderStep.bind(this);
+
+        this.state = {
+            "editing": false
+        };
+
+    }
 
     deleteRecipe() {
 
@@ -14,13 +30,11 @@ class Recipe extends Component {
         fetch(`https://recipe-man-db.herokuapp.com/api/${this.props.recipe._id}`, {
             method: "DELETE"
         })
-        .then(results => {
-            console.log(results)
-        }).catch(function(error) {
+            .then(results => {
+                console.log(results)
+            }).catch(function (error) {
             console.log(error);
         });
-
-
 
     }
 
@@ -39,61 +53,92 @@ class Recipe extends Component {
         return result;
     }
 
-    displayIngredients() {
-
-        let result = [];
-
-        for (let x = 0; x < this.props.recipe.ingredients.length; x++) {
-            result.push(
-                <p>
-                    {this.props.recipe.ingredients[x].quantity} {this.props.recipe.ingredients[x].unit} {this.props.recipe.ingredients[x].name}
+    renderStep(step, idx) {
+        if (!this.state.editing) {
+            return (
+                <p key={step+idx}>
+                    {idx + 1}) {step}
                 </p>
-            )
+            );
+        } else {
+            return (
+                <div key={idx}>
+                    {idx + 1}
+                    <input type="text" placeholder={step} onKeyUp={this.changeStep(idx)}/>
+                </div>
+            );
         }
-
-        return result;
     }
 
-    constructor(props) {
-        super(props);
-
-        this.displayIngredients = this.displayIngredients.bind(this);
-        this.displaySteps = this.displaySteps.bind(this);
-
+    editRecipe() {
         this.setState({
-            "editing": 'False'
-        })
+            "editing": !this.state.editing
+        });
+    }
 
+    renderIngredient(ingredient, idx) {
+        if (!this.state.editing) {
+            return (
+                <p key={idx}>
+                    {ingredient.quantity} {ingredient.unit} {ingredient.name}
+                </p>
+            );
+        } else {
+            return (
+                <div key={idx}>
+                    <input type="number" placeholder={ingredient.quantity}
+                           onKeyUp={this.changeIngredientField("quantity", idx)}/>
+                    <input type="text" placeholder={ingredient.unit} onKeyUp={this.changeIngredientField("unit", idx)}/>
+                    <input type="text" placeholder={ingredient.name} onKeyUp={this.changeIngredientField("name", idx)}/>
+                </div>
+            );
+        }
+    }
+
+    changeIngredientField(field, ingredientIdx) {
+        return (event) => {
+            this.props.handleIngredientChange(this.props.idx, ingredientIdx, field, event.target.value);
+        }
+    }
+
+    changeStep(stepIdx) {
+        return (event) => {
+            this.props.handleStepChange(this.props.idx, stepIdx, event.target.value)
+        }
     }
 
     render() {
         return (
             <Card>
                 <CardHeader
-                  title={this.props.recipe.title}
-                  actAsExpander={true}
-                  showExpandableButton={true}
+                    title={this.props.recipe.title}
+                    actAsExpander={true}
+                    showExpandableButton={true}
                 />
                 <CardText expandable={true}>
                     Ingredients:
-                        {this.displayIngredients()}
-                     Steps:
-                        {this.displaySteps()}
-                     <button>
-                        Edit
-                     </button>
-                     <button onClick={this.deleteRecipe.bind(this)}>
+                    {this.state.editing && <RaisedButton
+                        onClick={this.props.addIngredient(this.props.idx)}
+                        label="Add Recipe"
+                    />}
+                    {this.props.recipe.ingredients.map(this.renderIngredient)}
+                    Steps:
+                    {this.state.editing && <RaisedButton
+                        onClick={this.props.addStep(this.props.idx)}
+                        label="Add Step"
+                    />}
+                    {this.props.recipe.steps.map(this.renderStep)}
+                    <button onClick={this.editRecipe}>
+                        {!this.state.editing ? 'Edit' : 'Save'}
+                    </button>
+                    <button onClick={this.deleteRecipe}>
                         Delete
-                     </button>
-                     <button>
-                        Save
-                     </button>
-               </CardText>
+                    </button>
+                </CardText>
             </Card>
         );
     }
 }
-
 
 
 export default Recipe;
