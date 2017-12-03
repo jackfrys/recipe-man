@@ -21,7 +21,8 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            recipes: [],
+            "recipes": [],
+            "sharedRecipes": []
         };
 
         this.handleIngredientChange = this.handleIngredientChange.bind(this);
@@ -39,6 +40,27 @@ class Home extends Component {
             let recipes = data;
             this.setState({
                 "recipes": recipes,
+            });
+        });
+
+        fetch(`https://recipe-man-db.herokuapp.com/api/${this.props.match.params.id}/shared`)
+            .then(results => {
+                return results.json();
+            }).then(data => {
+            let recipes = data;
+            console.log(`sharedRecipes: ${recipes}`);
+            this.setState({
+                "sharedRecipes": recipes
+            });
+        });
+
+        fetch(`https://recipe-man-db.herokuapp.com/api/${this.props.match.params.id}/pantry`)
+        .then(results => {
+            return results.json();
+        }).then(data => {
+            let pantry = data;
+            this.setState({
+                "pantry": pantry
             });
         });
     }
@@ -90,6 +112,7 @@ class Home extends Component {
                     key={x}
                     idx={x}
                     recipe={this.state.recipes[x]}
+                    isShared={false}
                     handleIngredientChange={this.handleIngredientChange}
                     handleStepChange={this.handleStepChange}
                     addIngredient={this.addIngredient}
@@ -97,6 +120,21 @@ class Home extends Component {
                 />
             )
         }
+        for (let x = 0; x < this.state.sharedRecipes.length; x++) {
+            result.push(
+                <Recipe
+                    key={x}
+                    idx={x}
+                    isShared={true}
+                    recipe={this.state.sharedRecipes[x]}
+                    handleIngredientChange={this.handleIngredientChange}
+                    handleStepChange={this.handleStepChange}
+                    addIngredient={this.addIngredient}
+                    addStep={this.addStep}
+                />
+            )
+        }
+
         return result;
     }
 

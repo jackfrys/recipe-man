@@ -14,6 +14,7 @@ class Recipe extends Component {
         this.displayCategories = this.displayCategories.bind(this);
         this.changeStep = this.changeStep.bind(this);
         this.renderStep = this.renderStep.bind(this);
+        this.completeRecipe = this.completeRecipe.bind(this);
 
         this.state = {
             "editing": false
@@ -92,7 +93,7 @@ class Recipe extends Component {
     }
 
     renderIngredient(ingredient, idx) {
-        if (!this.state.editing) {
+        if (!this.state.editing || this.props.isShared) {
             return (
                 <p key={idx}>
                     {ingredient.quantity} {ingredient.unit} {ingredient.name}
@@ -122,6 +123,10 @@ class Recipe extends Component {
         }
     }
 
+    completeRecipe() {
+
+    }
+
     render() {
 
         return (
@@ -137,7 +142,7 @@ class Recipe extends Component {
                     Ingredients:
                     {this.state.editing && <RaisedButton
                         onClick={this.props.addIngredient(this.props.idx)}
-                        label="Add Recipe"
+                        label="Add Ingredient"
                     />}
                     {this.props.recipe.ingredients.map(this.renderIngredient)}
                     Steps:
@@ -146,12 +151,15 @@ class Recipe extends Component {
                         label="Add Step"
                     />}
                     {this.props.recipe.steps.map(this.renderStep)}
-                    <button onClick={this.editRecipe}>
+                    {!this.props.isShared && <RaisedButton onClick={this.editRecipe}>
                         {!this.state.editing ? 'Edit' : 'Save'}
-                    </button>
-                    <button onClick={this.deleteRecipe}>
+                    </RaisedButton>}
+                    <RaisedButton onClick={this.deleteRecipe}>
                         Delete
-                    </button>
+                    </RaisedButton>
+                    <RaisedButton onClick={this.completeRecipe}>
+                        Complete Recipe
+                    </RaisedButton>
                 </CardText>
             </Card>
         );
