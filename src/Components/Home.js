@@ -4,7 +4,7 @@ import Recipe from './Recipe.js';
 import Pantry from './Pantry.js';
 import Categories from './Categories.js';
 import NewCategoryModal from './NewCategoryModal.js';
-import NewRecipeModal from './NewCategoryModal.js';
+import NewRecipeModal from './NewRecipeModal.js';
 
 const styles = {
     headline: {
@@ -30,6 +30,7 @@ class Home extends Component {
         this.displayRecipes = this.displayRecipes.bind(this);
         this.addIngredient = this.addIngredient.bind(this);
         this.addStep = this.addStep.bind(this);
+        this.addRecipe = this.addRecipe.bind(this);
     }
 
     componentDidMount() {
@@ -65,6 +66,11 @@ class Home extends Component {
         });
     }
 
+    addRecipe(recipe) {
+        this.setState({
+            recipes: this.state.recipes.concat(recipe)
+        });
+    }
     handleIngredientChange(recipeIdx, ingredientIdx, field, newVal) {
         if (!field) {
             return;
@@ -147,7 +153,7 @@ class Home extends Component {
             <Tabs>
                 <Tab label="Recipes">
                     <div>
-                        <NewRecipeModal/>
+                        <NewRecipeModal addRecipe={this.addRecipe}/>
                         {this.displayRecipes()}
                     </div>
                 </Tab>
