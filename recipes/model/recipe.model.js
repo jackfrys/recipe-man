@@ -29,11 +29,11 @@ recipeModel.deleteRecipe = function (recipeId) {
 };
 
 recipeModel.addCategory = function (recipeId, categoryId) {
-    return recipeModel.findByIdAndUpdate(recipeId, {$push:{categories:mongoose.Schema.Types.ObjectId(categoryId)}});
+    return recipeModel.findByIdAndUpdate(recipeId, {$push:{categories:categoryId}});
 };
 
 recipeModel.removeCategory = function (recipeId, categoryId) {
-    return recipeModel.findByIdAndUpdate(recipeId, {$pullAll:{categories:mongoose.Schema.Types.ObjectId(categoryId)}});
+    return recipeModel.findByIdAndUpdate(recipeId, {$pullAll:{categories:categoryId}});
 };
 
 recipeModel.allRecipes = function () {
