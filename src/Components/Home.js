@@ -22,7 +22,6 @@ class Home extends Component {
         super(props);
         this.state = {
             recipes: [],
-            pantry: {}
         };
 
         this.handleIngredientChange = this.handleIngredientChange.bind(this);
@@ -39,19 +38,9 @@ class Home extends Component {
         }).then(data => {
             let recipes = data;
             this.setState({
-                "recipes": recipes
+                "recipes": recipes,
             });
-        })
-
-        fetch(`https://recipe-man-db.herokuapp.com/api/${this.props.match.params.id}/pantry`)
-        .then(results => {
-            return results.json();
-        }).then(data => {
-            let pantry = data;
-            this.setState({
-                "pantry": pantry[0]
-            });
-        })
+        });
     }
 
     handleIngredientChange(recipeIdx, ingredientIdx, field, newVal) {
@@ -115,7 +104,7 @@ class Home extends Component {
 
     render() {
 
-        const id = this.props.match.params.id;
+        let userID = this.props.match.params.id;
 
         return (
             <Tabs>
@@ -127,7 +116,7 @@ class Home extends Component {
                </Tab>
                <Tab label="Pantry">
                  <div>
-                   <Pantry pantry={this.state.pantry}/>
+                   <Pantry userID={userID}/>
                  </div>
                </Tab>
                <Tab label="New Recipe">
