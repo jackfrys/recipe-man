@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import Recipe from './Recipe.js'
+import Pantry from './Pantry.js'
+import Categories from './Categories.js'
 import NewRecipeModal from './NewRecipeModal.js'
 
 
@@ -19,7 +21,7 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            "recipes": []
+            recipes: [],
         };
 
         this.handleIngredientChange = this.handleIngredientChange.bind(this);
@@ -36,19 +38,9 @@ class Home extends Component {
         }).then(data => {
             let recipes = data;
             this.setState({
-                "recipes": recipes
+                "recipes": recipes,
             });
-        })
-
-        fetch(`https://recipe-man-db.herokuapp.com/api/${this.props.match.params.id}/pantry`)
-        .then(results => {
-            return results.json();
-        }).then(data => {
-            let pantry = data;
-            this.setState({
-                "pantry": pantry
-            });
-        })
+        });
     }
 
     handleIngredientChange(recipeIdx, ingredientIdx, field, newVal) {
@@ -112,7 +104,7 @@ class Home extends Component {
 
     render() {
 
-        const id = this.props.match.params.id;
+        let userID = this.props.match.params.id;
 
         return (
             <Tabs>
@@ -124,19 +116,14 @@ class Home extends Component {
                </Tab>
                <Tab label="Pantry">
                  <div>
-                   <h2 style={styles.headline}>Tab Two</h2>
-                   <p>
-                     This is another example tab. {id}
-                   </p>
+                   <Pantry userID={userID}/>
                  </div>
                </Tab>
                <Tab label="New Recipe">
                  <div>
                    <h2 style={styles.headline}>New Recipe</h2>
-                   <p>
-                     This is another example tab.
-                   </p>
-                 </div>
+                   <Categories />
+                  </div>
                </Tab>
             </Tabs>
         );

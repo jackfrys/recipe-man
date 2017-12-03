@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {FormControl} from 'react-bootstrap';
 import '../css/App.css';
 import logo from '../css/logo.svg';
+import {Redirect } from 'react-router'
 
 
 class Login extends Component {
@@ -9,21 +10,21 @@ class Login extends Component {
         super(props);
         this.state = {
             username: "",
-            password: ""
+            password: "",
+            id: "",
+            loggedIn: false
         }
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleUserChange = this.handleUserChange.bind(this);
     }
 
     handleUserChange(e) {
-        console.log("Handling user change: ", e.target.value)
         this.setState({
             username: e.target.value
         })
     }
 
     handlePasswordChange(e) {
-        console.log("Handling pw change: ", e.target.value)
         this.setState({
             password: e.target.value
         })
@@ -35,18 +36,22 @@ class Login extends Component {
         fetch(loginUrl).then(results => {
             return results.json();
         }).then(data => {
-            console.log(data);
-
             if (data.length > 0) {
-                window.location = '/home/' + data[0]._id;
+                this.setState({
+                    'id': data[0]._id,
+                    'loggedIn': true
+                });
+            } else {
+                alert('Please enter a correct username/pw combination');
             }
-
-        })
+        });
     }
 
 
     render() {
         return (
+            this.state.loggedIn ?
+                <Redirect to={`/home/${this.state.id}`} /> :
             <div className="App">
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo"/>
