@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
+import RaisedButton from 'material-ui/RaisedButton';
 
 
 class Recipe extends Component {
@@ -11,13 +12,14 @@ class Recipe extends Component {
         this.editRecipe = this.editRecipe.bind(this);
         this.renderIngredient = this.renderIngredient.bind(this);
         this.changeIngredientField = this.changeIngredientField.bind(this);
+        this.changeStep = this.changeStep.bind(this);
+        this.renderStep = this.renderStep.bind(this);
 
         this.state = {
             "editing": false
         };
 
     }
-
 
     deleteRecipe() {
 
@@ -51,11 +53,27 @@ class Recipe extends Component {
         return result;
     }
 
+    renderStep(step, idx) {
+        if (!this.state.editing) {
+            return (
+                <p key={step+idx}>
+                    {idx + 1}) {step}
+                </p>
+            );
+        } else {
+            return (
+                <div key={idx}>
+                    {idx + 1}
+                    <input type="text" placeholder={step} onKeyUp={this.changeStep(idx)}/>
+                </div>
+            );
+        }
+    }
+
     editRecipe() {
-        console.log("edit")
         this.setState({
             "editing": !this.state.editing
-        })
+        });
     }
 
     renderIngredient(ingredient, idx) {
@@ -68,7 +86,8 @@ class Recipe extends Component {
         } else {
             return (
                 <div key={idx}>
-                    <input type="number" placeholder={ingredient.quantity} onKeyUp={this.changeIngredientField("quantity", idx)}/>
+                    <input type="number" placeholder={ingredient.quantity}
+                           onKeyUp={this.changeIngredientField("quantity", idx)}/>
                     <input type="text" placeholder={ingredient.unit} onKeyUp={this.changeIngredientField("unit", idx)}/>
                     <input type="text" placeholder={ingredient.name} onKeyUp={this.changeIngredientField("name", idx)}/>
                 </div>
@@ -82,6 +101,12 @@ class Recipe extends Component {
         }
     }
 
+    changeStep(stepIdx) {
+        return (event) => {
+            this.props.handleStepChange(this.props.idx, stepIdx, event.target.value)
+        }
+    }
+
     render() {
         return (
             <Card>
@@ -92,9 +117,17 @@ class Recipe extends Component {
                 />
                 <CardText expandable={true}>
                     Ingredients:
+                    {this.state.editing && <RaisedButton
+                        onClick={this.props.addIngredient(this.props.idx)}
+                        label="Add Recipe"
+                    />}
                     {this.props.recipe.ingredients.map(this.renderIngredient)}
                     Steps:
-                    {this.displaySteps()}
+                    {this.state.editing && <RaisedButton
+                        onClick={this.props.addStep(this.props.idx)}
+                        label="Add Step"
+                    />}
+                    {this.props.recipe.steps.map(this.renderStep)}
                     <button onClick={this.editRecipe}>
                         {!this.state.editing ? 'Edit' : 'Save'}
                     </button>
