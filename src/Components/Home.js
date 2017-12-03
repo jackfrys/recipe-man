@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
-import Recipe from './Recipe.js'
-import Pantry from './Pantry.js'
-import Categories from './Categories.js'
-import NewRecipeModal from './NewRecipeModal.js'
-
+import Recipe from './Recipe.js';
+import Pantry from './Pantry.js';
+import Categories from './Categories.js';
+import NewCategoryModal from './NewCategoryModal.js';
+import NewRecipeModal from './NewCategoryModal.js';
 
 const styles = {
-  headline: {
-    fontSize: 24,
-    paddingTop: 16,
-    marginBottom: 12,
-    fontWeight: 400,
-  },
+    headline: {
+        fontSize: 24,
+        paddingTop: 16,
+        marginBottom: 12,
+        fontWeight: 400,
+    },
 };
 
 
@@ -34,9 +34,9 @@ class Home extends Component {
 
     componentDidMount() {
         fetch(`https://recipe-man-db.herokuapp.com/api/${this.props.match.params.id}/recipes`)
-        .then(results => {
-            return results.json();
-        }).then(data => {
+            .then(results => {
+                return results.json();
+            }).then(data => {
             let recipes = data;
             this.setState({
                 "recipes": recipes,
@@ -55,9 +55,9 @@ class Home extends Component {
         });
 
         fetch(`https://recipe-man-db.herokuapp.com/api/${this.props.match.params.id}/pantry`)
-        .then(results => {
-            return results.json();
-        }).then(data => {
+            .then(results => {
+                return results.json();
+            }).then(data => {
             let pantry = data;
             this.setState({
                 "pantry": pantry
@@ -139,30 +139,30 @@ class Home extends Component {
     }
 
 
-
     render() {
 
         let userID = this.props.match.params.id;
 
         return (
             <Tabs>
-               <Tab label="Recipes">
-                 <div>
-                    <NewRecipeModal/>
-                    {this.displayRecipes()}
-                 </div>
-               </Tab>
-               <Tab label="Pantry">
-                 <div>
-                   <Pantry userID={userID}/>
-                 </div>
-               </Tab>
-               <Tab label="New Recipe">
-                 <div>
-                   <h2 style={styles.headline}>New Recipe</h2>
-                   <Categories />
-                  </div>
-               </Tab>
+                <Tab label="Recipes">
+                    <div>
+                        <NewRecipeModal/>
+                        {this.displayRecipes()}
+                    </div>
+                </Tab>
+                <Tab label="Pantry">
+                    <div>
+                        <Pantry userID={userID}/>
+                    </div>
+                </Tab>
+                <Tab label="Categories">
+                    <div>
+                        <h2 style={styles.headline}>Categories</h2>
+                        <NewCategoryModal/>
+                        <Categories/>
+                    </div>
+                </Tab>
             </Tabs>
         );
     }
