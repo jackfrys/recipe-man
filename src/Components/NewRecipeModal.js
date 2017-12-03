@@ -23,8 +23,9 @@ export default class NewRecipeModal extends React.Component {
             ingredients: [{
                 'quantity': '',
                 'unit': '',
-                'name': ''
+                'name': '',
             }],
+            categories: [],
             steps: [``],
             open: false
         };
@@ -36,6 +37,9 @@ export default class NewRecipeModal extends React.Component {
         this.renderIngredient = this.renderIngredient.bind(this);
         this.addIngredient = this.addIngredient.bind(this);
         this.removeIngredient = this.removeIngredient.bind(this);
+        this.renderCategory = this.renderCategory.bind(this);
+        this.handleCategoryChange = this.handleCategoryChange.bind(this);
+        this.addCategory = this.addCategory.bind(this);
     };
 
     handleOpen = () => {
@@ -43,40 +47,30 @@ export default class NewRecipeModal extends React.Component {
     };
 
     handleClose = () => {
-        this.setState({open: false});
+        this.setState({
+            recipeTitle: '',
+            ingredients: [{
+                'quantity': '',
+                'unit': '',
+                'name': ''
+            }],
+            steps: [''],
+            categories: [],
+            open: false
+        });
     };
 
     handleSaveAndClose = () => {
-        //TODO: POST to server, get back response object to grab the _id so we can delete it
+        //TODO: POST each category to server, get back response object and use that as new categories array
+        //TODO: POST the recipe with categories, pass the response object to this.props.addRecipe
         this.props.addRecipe({
             title: this.state.title,
             steps: this.state.steps,
             ingredients: this.state.ingredients,
             _id: '',
-            categories: []
+            categories: this.state.categories
         });
-
-        this.setState({
-            recipeTitle: '',
-            ingredients: [],
-            steps: [],
-            open: false
-        });
-
-        // if (this.state.inputValue.trim() !== '') {
-        //     fetch(`https://recipe-man-db.herokuapp.com/api/category/create`, {
-        //         method: 'POST',
-        //         headers: {
-        //             'Accept': 'application/json',
-        //             'Content-Type': 'application/x-www-form-urlencoded'
-        //         },
-        //         body: "name=" + this.state.inputValue.trim().split(' ').join('+')
-        //
-        //     })
-        //         .then(results => {
-        //             return results;
-        //         });
-        // }
+        this.handleClose();
     };
 
     handleRecipeTitleChange(e) {
@@ -176,6 +170,34 @@ export default class NewRecipeModal extends React.Component {
         );
     }
 
+    addCategory() {
+        this.setState({
+            categories: this.state.categories.concat('')
+        });
+    }
+
+    handleCategoryChange(idx) {
+        return function (e) {
+            let newCategories = this.state.categories.concat([]);
+            newCategories[idx] = e.target.value;
+            this.setState({
+                categories: newCategories
+            });
+        }.bind(this);
+    }
+
+    renderCategory(ingredient, idx) {
+        return (
+            <div>
+                <TextField
+                    hintText={`Category`}
+                    value={this.state.categories[idx]}
+                    onChange={this.handleCategoryChange(idx)}
+                />
+            </div>
+        )
+    }
+
 
     render() {
         const actions = [
@@ -215,17 +237,22 @@ export default class NewRecipeModal extends React.Component {
                     />
                     <br/>
                     <RaisedButton
-                        label="Add ingredient"
+                        label="Add Ingredient"
                         onClick={this.addIngredient}
                     />
                     <br/>
                     {this.state.ingredients.map(this.renderIngredient)}
                     <RaisedButton
-                        label="Add step"
+                        label="Add Step"
                         onClick={this.addStep}
                     />
                     {this.state.steps.map(this.renderRecipeStepText)}
-
+                    <RaisedButton
+                        label="Add Category"
+                        onClick={this.addCategory}
+                    />
+                    <br/>
+                    {this.state.categories.map(this.renderCategory)}
                 </Dialog>
             </div>
         );

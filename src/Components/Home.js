@@ -88,6 +88,7 @@ class Home extends Component {
             console.log(error);
         });
     }
+
     handleIngredientChange(recipeIdx, ingredientIdx, field, newVal) {
         if (!field) {
             return;
