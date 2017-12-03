@@ -38,19 +38,9 @@ class Recipe extends Component {
     }
 
     deleteRecipe() {
-
         console.log(this.props.recipe._id);
-
         alert('are you sure?');
-
-        fetch(`https://recipe-man-db.herokuapp.com/api/${this.props.recipe._id}`, {
-            method: "DELETE"
-        })
-            .then(results => {
-                console.log(results)
-            }).catch(function (error) {
-            console.log(error);
-        });
+        this.props.deleteRecipe(this.props.idx);
 
     }
 

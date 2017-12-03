@@ -31,6 +31,7 @@ class Home extends Component {
         this.addIngredient = this.addIngredient.bind(this);
         this.addStep = this.addStep.bind(this);
         this.addRecipe = this.addRecipe.bind(this);
+        this.deleteRecipe = this.deleteRecipe.bind(this);
     }
 
     componentDidMount() {
@@ -69,6 +70,22 @@ class Home extends Component {
     addRecipe(recipe) {
         this.setState({
             recipes: this.state.recipes.concat(recipe)
+        });
+    }
+
+    deleteRecipe(idx) {
+        let newRecipes = this.state.recipes.concat([]);
+        newRecipes.pop(idx);
+        this.setState({
+            recipes: newRecipes
+        });
+        fetch(`https://recipe-man-db.herokuapp.com/api/${this.state.recipes[idx]._id}`, {
+            method: "DELETE"
+        })
+            .then(results => {
+                console.log(results)
+            }).catch(function (error) {
+            console.log(error);
         });
     }
     handleIngredientChange(recipeIdx, ingredientIdx, field, newVal) {
@@ -123,6 +140,7 @@ class Home extends Component {
                     handleStepChange={this.handleStepChange}
                     addIngredient={this.addIngredient}
                     addStep={this.addStep}
+                    deleteRecipe={this.deleteRecipe}
                 />
             )
         }
@@ -137,6 +155,7 @@ class Home extends Component {
                     handleStepChange={this.handleStepChange}
                     addIngredient={this.addIngredient}
                     addStep={this.addStep}
+                    deleteRecipe={this.deleteRecipe}
                 />
             )
         }

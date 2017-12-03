@@ -47,11 +47,13 @@ export default class NewRecipeModal extends React.Component {
     };
 
     handleSaveAndClose = () => {
+        //TODO: POST to server, get back response object to grab the _id so we can delete it
         this.props.addRecipe({
             title: this.state.title,
             steps: this.state.steps,
             ingredients: this.state.ingredients,
-            categories: ''
+            _id: '',
+            categories: []
         });
 
         this.setState({
@@ -60,7 +62,6 @@ export default class NewRecipeModal extends React.Component {
             steps: [],
             open: false
         });
-        //TODO: POST to server
 
         // if (this.state.inputValue.trim() !== '') {
         //     fetch(`https://recipe-man-db.herokuapp.com/api/category/create`, {
@@ -76,7 +77,6 @@ export default class NewRecipeModal extends React.Component {
         //             return results;
         //         });
         // }
-
     };
 
     handleRecipeTitleChange(e) {
