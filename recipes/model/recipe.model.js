@@ -13,7 +13,7 @@ recipeModel.recipesByUser = function (userId) {
 };
 
 recipeModel.sharedWithUser = function (userId) {
-    return recipeModel.find({shared:{$in:[mongoose.Schema.Types.ObjectId(userId)]}});
+    return recipeModel.find({shared:userId});
 };
 
 recipeModel.updateRecipe = function (recipeId, recipe) {
