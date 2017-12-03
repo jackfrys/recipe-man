@@ -1,5 +1,16 @@
 import React, {Component} from 'react';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
+import Chip from 'material-ui/Chip';
+
+const styles = {
+  chip: {
+    margin: 4,
+  },
+  wrapper: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+};
 
 
 class Recipe extends Component {
@@ -11,13 +22,27 @@ class Recipe extends Component {
         this.editRecipe = this.editRecipe.bind(this);
         this.renderIngredient = this.renderIngredient.bind(this);
         this.changeIngredientField = this.changeIngredientField.bind(this);
-
+        this.displayCategories = this.displayCategories.bind(this);
         this.state = {
             "editing": false
         };
 
     }
 
+    displayCategories() {
+        let result = [];
+
+        for (let x = 0; x < this.props.recipe.categories.length; x++) {
+            result.push(
+                <p>
+                    {this.props.recipe.categories[x]}
+                </p>
+            )
+        }
+
+        return result;
+
+    }
 
     deleteRecipe() {
 
@@ -83,13 +108,16 @@ class Recipe extends Component {
     }
 
     render() {
+
         return (
             <Card>
                 <CardHeader
                     title={this.props.recipe.title}
                     actAsExpander={true}
                     showExpandableButton={true}
-                />
+                >
+                {this.displayCategories()}
+                </CardHeader>
                 <CardText expandable={true}>
                     Ingredients:
                     {this.props.recipe.ingredients.map(this.renderIngredient)}
