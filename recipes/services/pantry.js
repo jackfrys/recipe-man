@@ -9,8 +9,8 @@ app.get("/api/:uid/pantry", function (req, res) {
 });
 
 app.post("/api/:uid/pantry/add", function (req, res) {
-    pantryModel.addPantryForUser(req.params.uid, req.body).then(function () {
-        res.send(200);
+    pantryModel.addPantryForUser(req.params.uid, req.body).then(function (data) {
+        res.json(data);
     });
 });
 

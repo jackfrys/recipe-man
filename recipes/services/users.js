@@ -14,7 +14,7 @@ app.post("/api/user/create", function (req, res) {
     userModel.findByCredentials(user.username, user.password).then(function (data) {
         if (data.length == 0) {
             userModel.createUser(user).then(function (comp) {
-                res.sendStatus(200);
+                res.json(comp);
             });
         } else {
             res.sendStatus(400);

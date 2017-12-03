@@ -27,8 +27,8 @@ app.delete("/api/category/:cid", function (req, res) {
 });
 
 app.post("/api/category/create", function (req, res) {
-    categoryModel.createCategory(req.body).then(function () {
-        res.send(200);
+    categoryModel.createCategory(req.body).then(function (data) {
+        res.json(data);
     });
 });
 

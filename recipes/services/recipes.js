@@ -22,8 +22,8 @@ app.get("/api/recipe/:rid", function (req, res) {
 });
 
 app.post("/api/:uid/recipe/create", function (req, res) {
-    recipeModel.createRecipe(req.params.uid, req.body).then(function () {
-        res.send(200);
+    recipeModel.createRecipe(req.params.uid, req.body).then(function (data) {
+        res.json(data);
     }).catch(function (err) {
         res.send(400);
     });
