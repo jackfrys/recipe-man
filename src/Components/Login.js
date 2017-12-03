@@ -13,7 +13,7 @@ class Login extends Component {
             password: "",
             id: "",
             loggedIn: false
-        }
+        };
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleUserChange = this.handleUserChange.bind(this);
     }
@@ -21,13 +21,13 @@ class Login extends Component {
     handleUserChange(e) {
         this.setState({
             username: e.target.value
-        })
+        });
     }
 
     handlePasswordChange(e) {
         this.setState({
             password: e.target.value
-        })
+        });
     }
 
     login() {
