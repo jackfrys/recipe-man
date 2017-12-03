@@ -1,17 +1,5 @@
 import React, {Component} from 'react';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
-import Chip from 'material-ui/Chip';
-
-const styles = {
-  chip: {
-    margin: 4,
-  },
-  wrapper: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-};
-
 
 class Recipe extends Component {
 
