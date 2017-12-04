@@ -24,6 +24,27 @@ class Recipe extends Component {
 
     }
 
+    componentDidMount() {
+        if (this.props.userPantryID && this.props.recipe._id) {
+
+            fetch(`https://recipe-man-db.herokuapp.com/api/recipe/${this.props.recipe._id}/complete/${this.props.userPantryID}`)
+                .then(results => {
+                    return results.json();
+                }).then(data => {
+                    console.log(data);
+                    if (data['allows'] === false) {
+                        this.setState({
+                            "isDisabled": true
+                        })
+                    } else {
+                        this.setState({
+                            "isDisabled": false
+                        })
+                    }
+            });
+        }
+    }
+
 
 
     displayCategories() {
@@ -121,21 +142,30 @@ class Recipe extends Component {
 
     completeRecipe() {
 
+        fetch(`https://recipe-man-db.herokuapp.com/api/recipe/${this.props.recipe._id}/complete/${this.props.userPantryID}`, {
+            method: 'POST'
+        })
+            .then(results => {
+                return results.json();
+            }).then(data => {
+                console.log(data);
+                if (data['allows'] === false) {
+                    this.setState({
+                        "isDisabled": true
+                    })
+                } else {
+                    this.setState({
+                        "isDisabled": false
+                    })
+                }
+        });
+
     }
 
 
     render() {
 
-        console.log("twice" +this.props.userPantryID );
-        if (this.props.userPantryID) {
 
-            fetch(`https://recipe-man-db.herokuapp.com/api/recipe/${this.props.recipe._id}/recipes/${this.props.userPantryID}`)
-                .then(results => {
-                    return results.json();
-                }).then(data => {
-                    console.log(data);
-            });
-        }
 
         return (
             <Card>
@@ -165,7 +195,7 @@ class Recipe extends Component {
                     <RaisedButton onClick={this.deleteRecipe}>
                         Delete
                     </RaisedButton>
-                    <RaisedButton onClick={this.completeRecipe} disabled={this.state.isDisabled}>
+                    <RaisedButton onClick={this.completeRecipe}>
                         Complete Recipe
                     </RaisedButton>
                 </CardText>
