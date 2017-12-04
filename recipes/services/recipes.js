@@ -73,7 +73,7 @@ app.get("/api/recipes", function (req, res) {
 app.get("/api/recipe/:rid/complete/:pid", function (req, res) {
     recipeModel.findById(req.params.rid).then(function (recipe) {
         pantryModel.findById(req.params.pid).then(function (pantry) {
-            for (var i in recipe.ingredients) {
+            for (var i in recipe.ingredients.toObject()) {
                 var ing = recipe.ingredients[i];
                 if (!allows(ing, pantry.ingredients)) {
                     res.json({allows:false});
@@ -87,7 +87,7 @@ app.get("/api/recipe/:rid/complete/:pid", function (req, res) {
 app.post("/api/recipe/:rid/complete/:pid", function (req, res) {
     recipeModel.findById(req.params.rid).then(function (recipe) {
         pantryModel.findById(req.params.pid).then(function (pantry) {
-            for (var i in recipe.ingredients) {
+            for (var i in recipe.ingredients.toObject()) {
                 var ing = recipe.ingredients[i];
                 reduce(ing, pantry.ingredients);
             }
