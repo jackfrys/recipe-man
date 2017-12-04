@@ -19,19 +19,22 @@ class Category extends Component {
     constructor(props) {
         super(props);
 
+
+        this.renderCategory = this.renderCategory.bind(this);
+
         this.state = {
             "categories": []
         }
 
     }
 
-    renderCategory() {
+    renderCategory(category, idx) {
         return (
-            <Chip
-             style={styles.chip}
-           >
-             Text Chip
-           </Chip>
+                <Chip
+                 style={styles.chip}
+               >
+                 {category.name}
+               </Chip>
         )
     }
 
@@ -51,8 +54,8 @@ class Category extends Component {
     render() {
 
         return (
-            <div>
-            {this.state.categories.map(this.renderIngredient)}
+            <div style={styles.wrapper}>
+            {this.state.categories.map(this.renderCategory)}
             </div>
 
 

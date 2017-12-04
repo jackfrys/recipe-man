@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+
+const style = {
+    marginLeft: 20,
+    width: "28%"
+};
 
 class Recipe extends Component {
 
@@ -16,11 +22,36 @@ class Recipe extends Component {
         this.renderStep = this.renderStep.bind(this);
         this.completeRecipe = this.completeRecipe.bind(this);
 
+
         this.state = {
-            "editing": false
+            "editing": false,
+            "isDisabled": true
         };
 
     }
+
+    componentDidMount() {
+        if (this.props.userPantryID && this.props.recipe._id) {
+
+            fetch(`https://recipe-man-db.herokuapp.com/api/recipe/${this.props.recipe._id}/complete/${this.props.userPantryID}`)
+                .then(results => {
+                    return results.json();
+                }).then(data => {
+                    console.log(data);
+                    if (data['allows'] === false) {
+                        this.setState({
+                            "isDisabled": true
+                        })
+                    } else {
+                        this.setState({
+                            "isDisabled": false
+                        })
+                    }
+            });
+        }
+    }
+
+
 
     displayCategories() {
         let result = [];
@@ -62,16 +93,19 @@ class Recipe extends Component {
     renderStep(step, idx) {
         if (!this.state.editing) {
             return (
-                <p key={step+idx}>
-                    {idx + 1}) {step}
-                </p>
+                <li key={step + idx}>
+                    {step}
+                </li>
             );
         } else {
             return (
-                <div key={idx}>
-                    {idx + 1}
-                    <input type="text" placeholder={step} onKeyUp={this.changeStep(idx)}/>
-                </div>
+                <li key={idx}>
+                    <TextField
+                        style={style}
+                        defaultValue={step}
+                        onChange={this.changeStep(idx)}
+                    />
+                </li>
             );
         }
     }
@@ -80,22 +114,35 @@ class Recipe extends Component {
         this.setState({
             "editing": !this.state.editing
         });
+        this.props.saveRecipe(this.props.idx);
+
     }
 
     renderIngredient(ingredient, idx) {
         if (!this.state.editing || this.props.isShared) {
             return (
-                <p key={idx}>
+                <li key={idx}>
                     {ingredient.quantity} {ingredient.unit} {ingredient.name}
-                </p>
+                </li>
             );
         } else {
             return (
                 <div key={idx}>
-                    <input type="number" placeholder={ingredient.quantity}
-                           onKeyUp={this.changeIngredientField("quantity", idx)}/>
-                    <input type="text" placeholder={ingredient.unit} onKeyUp={this.changeIngredientField("unit", idx)}/>
-                    <input type="text" placeholder={ingredient.name} onKeyUp={this.changeIngredientField("name", idx)}/>
+                    <TextField
+                        style={{'width': '3%'}}
+                        defaultValue={ingredient.quantity}
+                        onChange={this.changeIngredientField("quantity", idx)}
+                    />
+                    <TextField
+                        style={style}
+                        defaultValue={ingredient.unit}
+                        onChange={this.changeIngredientField("unit", idx)}
+                    />
+                    <TextField
+                        style={style}
+                        defaultValue={ingredient.name}
+                        onChange={this.changeIngredientField("name", idx)}
+                    />
                 </div>
             );
         }
@@ -115,9 +162,30 @@ class Recipe extends Component {
 
     completeRecipe() {
 
+        fetch(`https://recipe-man-db.herokuapp.com/api/recipe/${this.props.recipe._id}/complete/${this.props.userPantryID}`, {
+            method: 'POST'
+        })
+            .then(results => {
+                return results.json();
+            }).then(data => {
+                console.log(data);
+                if (data['allows'] === false) {
+                    this.setState({
+                        "isDisabled": true
+                    })
+                } else {
+                    this.setState({
+                        "isDisabled": false
+                    })
+                }
+        });
+
     }
 
+
     render() {
+
+
 
         return (
             <Card>
@@ -126,21 +194,25 @@ class Recipe extends Component {
                     actAsExpander={true}
                     showExpandableButton={true}
                 >
-                {this.displayCategories()}
+                    {this.displayCategories()}
                 </CardHeader>
                 <CardText expandable={true}>
-                    Ingredients:
+                    <h3> Ingredients: </h3>
                     {this.state.editing && <RaisedButton
                         onClick={this.props.addIngredient(this.props.idx)}
                         label="Add Ingredient"
                     />}
-                    {this.props.recipe.ingredients.map(this.renderIngredient)}
-                    Steps:
+                    <ul>
+                        {this.props.recipe.ingredients.map(this.renderIngredient)}
+                    </ul>
+                    <h3> Steps: </h3>
                     {this.state.editing && <RaisedButton
                         onClick={this.props.addStep(this.props.idx)}
                         label="Add Step"
                     />}
-                    {this.props.recipe.steps.map(this.renderStep)}
+                    <ol>
+                        {this.props.recipe.steps.map(this.renderStep)}
+                    </ol>
                     {!this.props.isShared && <RaisedButton onClick={this.editRecipe}>
                         {!this.state.editing ? 'Edit' : 'Save'}
                     </RaisedButton>}
