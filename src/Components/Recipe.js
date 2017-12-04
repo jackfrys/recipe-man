@@ -16,11 +16,15 @@ class Recipe extends Component {
         this.renderStep = this.renderStep.bind(this);
         this.completeRecipe = this.completeRecipe.bind(this);
 
+
         this.state = {
-            "editing": false
+            "editing": false,
+            "isDisabled": true
         };
 
     }
+
+
 
     displayCategories() {
         let result = [];
@@ -80,6 +84,8 @@ class Recipe extends Component {
         this.setState({
             "editing": !this.state.editing
         });
+        this.props.saveRecipe(this.props.idx);
+
     }
 
     renderIngredient(ingredient, idx) {
@@ -117,7 +123,19 @@ class Recipe extends Component {
 
     }
 
+
     render() {
+
+        console.log("twice" +this.props.userPantryID );
+        if (this.props.userPantryID) {
+
+            fetch(`https://recipe-man-db.herokuapp.com/api/recipe/${this.props.recipe._id}/recipes/${this.props.userPantryID}`)
+                .then(results => {
+                    return results.json();
+                }).then(data => {
+                    console.log(data);
+            });
+        }
 
         return (
             <Card>
@@ -147,7 +165,7 @@ class Recipe extends Component {
                     <RaisedButton onClick={this.deleteRecipe}>
                         Delete
                     </RaisedButton>
-                    <RaisedButton onClick={this.completeRecipe}>
+                    <RaisedButton onClick={this.completeRecipe} disabled={this.state.isDisabled}>
                         Complete Recipe
                     </RaisedButton>
                 </CardText>

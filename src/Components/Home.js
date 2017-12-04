@@ -22,7 +22,8 @@ class Home extends Component {
         super(props);
         this.state = {
             "recipes": [],
-            "sharedRecipes": []
+            "sharedRecipes": [],
+            "pantry": {}
         };
 
         this.handleIngredientChange = this.handleIngredientChange.bind(this);
@@ -32,6 +33,8 @@ class Home extends Component {
         this.addStep = this.addStep.bind(this);
         this.addRecipe = this.addRecipe.bind(this);
         this.deleteRecipe = this.deleteRecipe.bind(this);
+        this.pushRecipeToServer = this.pushRecipeToServer.bind(this);
+
     }
 
     componentDidMount() {
@@ -50,7 +53,6 @@ class Home extends Component {
                 return results.json();
             }).then(data => {
             let recipes = data;
-            console.log(`sharedRecipes: ${recipes}`);
             this.setState({
                 "sharedRecipes": recipes
             });
@@ -66,6 +68,23 @@ class Home extends Component {
             });
         });
     }
+
+    pushRecipeToServer(recipeIdx) {
+
+        fetch(`https://recipe-man-db.herokuapp.com/api/recipe/${this.state.recipes[recipeIdx]._id}/update`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(this.state.recipes[recipeIdx])
+        })
+        .then(results => {
+            return results;
+        }).catch(function(error) {
+            console.log(error);
+        });
+    }
+
 
     addRecipe(recipe) {
         this.setState({
@@ -83,19 +102,7 @@ class Home extends Component {
             method: "DELETE"
         })
 
-        console.log("here");
 
-
-        fetch(`https://recipe-man-db.herokuapp.com/api/${this.props.match.params.id}/shared`)
-        .then(results => {
-            return results.json();
-        }).then(data => {
-            let shared = data;
-            this.setState({
-                "shared": shared
-            });
-            console.log(shared);
-        })
     }
 
     handleIngredientChange(recipeIdx, ingredientIdx, field, newVal) {
@@ -105,14 +112,13 @@ class Home extends Component {
         let newState = Object.assign({}, this.state);
         newState.recipes[recipeIdx]['ingredients'][ingredientIdx][field] = newVal;
         this.setState(newState);
-        // TODO: Post update to server
     }
 
     handleStepChange(recipeIdx, stepIdx, newVal) {
         let newState = Object.assign({}, this.state);
         newState.recipes[recipeIdx]['steps'][stepIdx] = newVal;
         this.setState(newState);
-        // TODO: Post update to server
+
     }
 
     addIngredient(recipeIdx) {
@@ -125,7 +131,6 @@ class Home extends Component {
             });
             this.setState(newState);
         }
-        // TODO: Post update to server
     }
 
     addStep(recipeIdx) {
@@ -133,9 +138,11 @@ class Home extends Component {
             let newState = Object.assign({}, this.state);
             newState.recipes[recipeIdx]['steps'].push('');
             this.setState(newState);
+
         }
-        // TODO: Post update to server
+
     }
+
 
     displayRecipes() {
         let result = [];
@@ -151,6 +158,8 @@ class Home extends Component {
                     addIngredient={this.addIngredient}
                     addStep={this.addStep}
                     deleteRecipe={this.deleteRecipe}
+                    saveRecipe={this.pushRecipeToServer}
+                    userPantryID={this.state.pantry._id}
                 />
             )
         }
@@ -166,6 +175,8 @@ class Home extends Component {
                     addIngredient={this.addIngredient}
                     addStep={this.addStep}
                     deleteRecipe={this.deleteRecipe}
+                    saveRecipe={this.pushRecipeToServer}
+                    userPantryID={this.state.pantry._id}
                 />
             )
         }
@@ -173,10 +184,6 @@ class Home extends Component {
         return result;
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> master
     render() {
 
         let userID = this.props.match.params.id;
@@ -185,8 +192,9 @@ class Home extends Component {
             <Tabs>
                 <Tab label="Recipes">
                     <div>
-                        <NewRecipeModal addRecipe={this.addRecipe}/>
+                        <NewRecipeModal addRecipe={this.addRecipe} userID={userID}/>
                         {this.displayRecipes()}
+
                     </div>
                 </Tab>
                 <Tab label="Pantry">
