@@ -21,6 +21,7 @@ class Category extends Component {
 
 
         this.renderCategory = this.renderCategory.bind(this);
+        this.handleRequestDelete = this.handleRequestDelete.bind(this);
 
         this.state = {
             "categories": []
@@ -28,9 +29,15 @@ class Category extends Component {
 
     }
 
+    handleRequestDelete(event, idx) {
+      alert("Whoops this isn't wired up yet!");
+    }
+
+
     renderCategory(category, idx) {
         return (
                 <Chip
+                 onRequestDelete={this.handleRequestDelete}
                  style={styles.chip}
                >
                  {category.name}
