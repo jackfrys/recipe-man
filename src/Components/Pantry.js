@@ -54,23 +54,19 @@ class Pantry extends Component {
             'name': this.state.name
         });
         this.setState(newState);
-        //TODO: push changes to the db
 
-        //here we need to push the changes up to the db
-
-        // fetch(`https://recipe-man-db.herokuapp.com/api/${this.props.pantry._id}/update`, {
-        //     method: "PUT",
-        //     body: {
-        //         name: this.props.pantry.name,
-        //         ingredients:
-        //             // this.props.pantry.ingredients.concat()
-        //     }
-        // })
-        // .then(results => {
-        //     console.log(results)
-        // }).catch(function(error) {
-        //     console.log(error);
-        // });
+        fetch(`https://recipe-man-db.herokuapp.com/api/${this.state.pantry._id}/update`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(this.state.pantry)
+        })
+        .then(results => {
+            return results;
+        }).catch(function(error) {
+            console.log(error);
+        });
     }
 
     handleIngredientChange(field) {

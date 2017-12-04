@@ -61,8 +61,48 @@ export default class NewRecipeModal extends React.Component {
     };
 
     handleSaveAndClose = () => {
-        //TODO: POST each category to server, get back response object and use that as new categories array
-        //TODO: POST the recipe with categories, pass the response object to this.props.addRecipe
+
+        var categoryIDs = [];
+
+
+        for (let x = 0; x < this.state.categories.length; x++) {
+            if (this.state.categories[x].trim() !== '') {
+                fetch(`https://recipe-man-db.herokuapp.com/api/category/create`, {
+                    method: 'POST',
+                    headers: {
+                    'Accept': 'application/json',
+                      'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: "name=" + this.state.categories[x].trim().split(' ').join('+')
+
+                })
+                .then(results => {
+                    return results.json();
+                })
+                .then(results => {
+                    categoryIDs.push(results._id);
+                });
+            }
+        }
+
+
+        this.setState({
+            categories: categoryIDs
+        })
+
+        fetch(`https://recipe-man-db.herokuapp.com/api/${this.props.userID}/recipe/create`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(this.state)
+        })
+        .then(results => {
+            return results;
+        }).catch(function(error) {
+            console.log(error);
+        });
+
         this.props.addRecipe({
             title: this.state.title,
             steps: this.state.steps,
