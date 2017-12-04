@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
-import Recipe from './Recipe.js'
-import NewRecipeModal from './NewRecipeModal.js'
-
+import Recipe from './Recipe.js';
+import Pantry from './Pantry.js';
+import Categories from './Categories.js';
+import NewCategoryModal from './NewCategoryModal.js';
+import NewRecipeModal from './NewRecipeModal.js';
 
 const styles = {
-  headline: {
-    fontSize: 24,
-    paddingTop: 16,
-    marginBottom: 12,
-    fontWeight: 400,
-  },
+    headline: {
+        fontSize: 24,
+        paddingTop: 16,
+        marginBottom: 12,
+        fontWeight: 400,
+    },
 };
 
 
@@ -19,7 +21,8 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            "recipes": []
+            "recipes": [],
+            "sharedRecipes": []
         };
 
         this.handleIngredientChange = this.handleIngredientChange.bind(this);
@@ -27,27 +30,57 @@ class Home extends Component {
         this.displayRecipes = this.displayRecipes.bind(this);
         this.addIngredient = this.addIngredient.bind(this);
         this.addStep = this.addStep.bind(this);
+        this.addRecipe = this.addRecipe.bind(this);
+        this.deleteRecipe = this.deleteRecipe.bind(this);
     }
 
     componentDidMount() {
         fetch(`https://recipe-man-db.herokuapp.com/api/${this.props.match.params.id}/recipes`)
-        .then(results => {
-            return results.json();
-        }).then(data => {
+            .then(results => {
+                return results.json();
+            }).then(data => {
             let recipes = data;
             this.setState({
-                "recipes": recipes
+                "recipes": recipes,
             });
-        })
+        });
+
+        fetch(`https://recipe-man-db.herokuapp.com/api/${this.props.match.params.id}/shared`)
+            .then(results => {
+                return results.json();
+            }).then(data => {
+            let recipes = data;
+            console.log(`sharedRecipes: ${recipes}`);
+            this.setState({
+                "sharedRecipes": recipes
+            });
+        });
 
         fetch(`https://recipe-man-db.herokuapp.com/api/${this.props.match.params.id}/pantry`)
-        .then(results => {
-            return results.json();
-        }).then(data => {
+            .then(results => {
+                return results.json();
+            }).then(data => {
             let pantry = data;
             this.setState({
                 "pantry": pantry
             });
+        });
+    }
+
+    addRecipe(recipe) {
+        this.setState({
+            recipes: this.state.recipes.concat(recipe)
+        });
+    }
+
+    deleteRecipe(idx) {
+        let newRecipes = this.state.recipes.concat([]);
+        newRecipes.pop(idx);
+        this.setState({
+            recipes: newRecipes
+        });
+        fetch(`https://recipe-man-db.herokuapp.com/api/${this.state.recipes[idx]._id}`, {
+            method: "DELETE"
         })
 
         console.log("here");
@@ -112,44 +145,62 @@ class Home extends Component {
                     key={x}
                     idx={x}
                     recipe={this.state.recipes[x]}
+                    isShared={false}
                     handleIngredientChange={this.handleIngredientChange}
                     handleStepChange={this.handleStepChange}
                     addIngredient={this.addIngredient}
                     addStep={this.addStep}
+                    deleteRecipe={this.deleteRecipe}
                 />
             )
         }
+        for (let x = 0; x < this.state.sharedRecipes.length; x++) {
+            result.push(
+                <Recipe
+                    key={x}
+                    idx={x}
+                    isShared={true}
+                    recipe={this.state.sharedRecipes[x]}
+                    handleIngredientChange={this.handleIngredientChange}
+                    handleStepChange={this.handleStepChange}
+                    addIngredient={this.addIngredient}
+                    addStep={this.addStep}
+                    deleteRecipe={this.deleteRecipe}
+                />
+            )
+        }
+
         return result;
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
     render() {
 
-        const id = this.props.match.params.id;
+        let userID = this.props.match.params.id;
 
         return (
             <Tabs>
-               <Tab label="Recipes">
-                 <div>
-                    <NewRecipeModal/>
-                    {this.displayRecipes()}
-                 </div>
-               </Tab>
-               <Tab label="Pantry">
-                 <div>
-                   <h2 style={styles.headline}>Tab Two</h2>
-                   <p>
-                     This is another example tab. {id}
-                   </p>
-                 </div>
-               </Tab>
-               <Tab label="New Recipe">
-                 <div>
-                   <h2 style={styles.headline}>New Recipe</h2>
-                   <p>
-                     This is another example tab.
-                   </p>
-                 </div>
-               </Tab>
+                <Tab label="Recipes">
+                    <div>
+                        <NewRecipeModal addRecipe={this.addRecipe}/>
+                        {this.displayRecipes()}
+                    </div>
+                </Tab>
+                <Tab label="Pantry">
+                    <div>
+                        <Pantry userID={userID}/>
+                    </div>
+                </Tab>
+                <Tab label="Categories">
+                    <div>
+                        <h2 style={styles.headline}>Categories</h2>
+                        <NewCategoryModal/>
+                        <Categories/>
+                    </div>
+                </Tab>
             </Tabs>
         );
     }

@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 
-
 class Recipe extends Component {
 
     constructor(props) {
@@ -12,8 +11,10 @@ class Recipe extends Component {
         this.editRecipe = this.editRecipe.bind(this);
         this.renderIngredient = this.renderIngredient.bind(this);
         this.changeIngredientField = this.changeIngredientField.bind(this);
+        this.displayCategories = this.displayCategories.bind(this);
         this.changeStep = this.changeStep.bind(this);
         this.renderStep = this.renderStep.bind(this);
+        this.completeRecipe = this.completeRecipe.bind(this);
 
         this.state = {
             "editing": false
@@ -21,20 +22,25 @@ class Recipe extends Component {
 
     }
 
+    displayCategories() {
+        let result = [];
+
+        for (let x = 0; x < this.props.recipe.categories.length; x++) {
+            result.push(
+                <p>
+                    {this.props.recipe.categories[x]}
+                </p>
+            )
+        }
+
+        return result;
+
+    }
+
     deleteRecipe() {
-
         console.log(this.props.recipe._id);
-
         alert('are you sure?');
-
-        fetch(`https://recipe-man-db.herokuapp.com/api/${this.props.recipe._id}`, {
-            method: "DELETE"
-        })
-            .then(results => {
-                console.log(results)
-            }).catch(function (error) {
-            console.log(error);
-        });
+        this.props.deleteRecipe(this.props.idx);
 
     }
 
@@ -77,7 +83,7 @@ class Recipe extends Component {
     }
 
     renderIngredient(ingredient, idx) {
-        if (!this.state.editing) {
+        if (!this.state.editing || this.props.isShared) {
             return (
                 <p key={idx}>
                     {ingredient.quantity} {ingredient.unit} {ingredient.name}
@@ -107,19 +113,26 @@ class Recipe extends Component {
         }
     }
 
+    completeRecipe() {
+
+    }
+
     render() {
+
         return (
             <Card>
                 <CardHeader
                     title={this.props.recipe.title}
                     actAsExpander={true}
                     showExpandableButton={true}
-                />
+                >
+                {this.displayCategories()}
+                </CardHeader>
                 <CardText expandable={true}>
                     Ingredients:
                     {this.state.editing && <RaisedButton
                         onClick={this.props.addIngredient(this.props.idx)}
-                        label="Add Recipe"
+                        label="Add Ingredient"
                     />}
                     {this.props.recipe.ingredients.map(this.renderIngredient)}
                     Steps:
@@ -128,12 +141,15 @@ class Recipe extends Component {
                         label="Add Step"
                     />}
                     {this.props.recipe.steps.map(this.renderStep)}
-                    <button onClick={this.editRecipe}>
+                    {!this.props.isShared && <RaisedButton onClick={this.editRecipe}>
                         {!this.state.editing ? 'Edit' : 'Save'}
-                    </button>
-                    <button onClick={this.deleteRecipe}>
+                    </RaisedButton>}
+                    <RaisedButton onClick={this.deleteRecipe}>
                         Delete
-                    </button>
+                    </RaisedButton>
+                    <RaisedButton onClick={this.completeRecipe}>
+                        Complete Recipe
+                    </RaisedButton>
                 </CardText>
             </Card>
         );
