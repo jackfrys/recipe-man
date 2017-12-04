@@ -34,11 +34,11 @@ class Pantry extends Component {
             .then(results => {
                 return results.json();
             }).then(data => {
-                console.log("logged in")
-                let pantry = data;
-                this.setState({
-                    "pantry": pantry[0]
-                });
+            console.log("logged in")
+            let pantry = data;
+            this.setState({
+                "pantry": pantry[0]
+            });
         });
     }
 
@@ -84,9 +84,9 @@ class Pantry extends Component {
 
     renderIngredient(ingredient, idx) {
         return (
-            <div key={ingredient.name + idx}>
+            <li key={ingredient.name + idx}>
                 <p>{ingredient.quantity} {ingredient.unit} {ingredient.name}</p>
-            </div>
+            </li>
         );
     }
 
@@ -97,7 +97,9 @@ class Pantry extends Component {
             <Card>
                 <CardTitle title="Your Pantry" subtitle="Here's what you have"/>
                 <CardText>
-                    {this.state.pantry.ingredients && this.state.pantry.ingredients.map(this.renderIngredient)}
+                    <ul>
+                        {this.state.pantry.ingredients && this.state.pantry.ingredients.map(this.renderIngredient)}
+                    </ul>
                     <Divider/>
                     <Paper zDepth={2}>
                         <TextField

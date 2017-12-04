@@ -122,7 +122,7 @@ class Home extends Component {
     addStep(recipeIdx) {
         return () => {
             let newState = Object.assign({}, this.state);
-            newState.recipes[recipeIdx]['steps'].push('');
+            newState.recipes[recipeIdx]['steps'].push(`Step ${newState.recipes[recipeIdx]['steps'].length + 1}`)
             this.setState(newState);
         }
         // TODO: Post update to server
