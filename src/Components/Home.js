@@ -23,7 +23,7 @@ class Home extends Component {
         this.state = {
             "recipes": [],
             "sharedRecipes": [],
-            "pantry": {}
+            "pantry": [[]]
         };
 
         this.handleIngredientChange = this.handleIngredientChange.bind(this);
@@ -159,7 +159,7 @@ class Home extends Component {
                     addStep={this.addStep}
                     deleteRecipe={this.deleteRecipe}
                     saveRecipe={this.pushRecipeToServer}
-                    userPantryID={this.state.pantry._id}
+                    userPantryID={this.state.pantry[0]._id}
                 />
             )
         }
@@ -176,7 +176,7 @@ class Home extends Component {
                     addStep={this.addStep}
                     deleteRecipe={this.deleteRecipe}
                     saveRecipe={this.pushRecipeToServer}
-                    userPantryID={this.state.pantry._id}
+                    userPantryID={this.state.pantry[0]._id}
                 />
             )
         }
