@@ -30,8 +30,10 @@ class Recipe extends Component {
 
     }
 
-    componentDidMount() {
-        if (this.props.userPantryID && this.props.recipe._id) {
+    componentWillReceiveProps(nextProps) {
+        if (typeof nextProps.userPantryID !== undefined && typeof nextProps.recipe.id !== undefined) {
+
+            console.log(`https://recipe-man-db.herokuapp.com/api/recipe/${this.props.recipe._id}/complete/${this.props.userPantryID}`);
 
             fetch(`https://recipe-man-db.herokuapp.com/api/recipe/${this.props.recipe._id}/complete/${this.props.userPantryID}`)
                 .then(results => {
@@ -166,26 +168,13 @@ class Recipe extends Component {
             method: 'POST'
         })
             .then(results => {
-                return results.json();
-            }).then(data => {
-                console.log(data);
-                if (data['allows'] === false) {
-                    this.setState({
-                        "isDisabled": true
-                    })
-                } else {
-                    this.setState({
-                        "isDisabled": false
-                    })
-                }
+                console.log(results);
         });
 
     }
 
 
     render() {
-
-
 
         return (
             <Card>
@@ -219,7 +208,7 @@ class Recipe extends Component {
                     <RaisedButton onClick={this.deleteRecipe}>
                         Delete
                     </RaisedButton>
-                    <RaisedButton onClick={this.completeRecipe}>
+                    <RaisedButton onClick={this.completeRecipe} disabled={this.state.isDisabled}>
                         Complete Recipe
                     </RaisedButton>
                 </CardText>
