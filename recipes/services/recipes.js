@@ -80,6 +80,8 @@ app.get("/api/recipe/:rid/complete/:pid", function (req, res) {
                 }
             }
             res.json({allows:true});
+        }).catch(function (err) {
+            var e = err;
         });
     });
 });
@@ -101,7 +103,7 @@ app.post("/api/recipe/:rid/complete/:pid", function (req, res) {
 function reduce(ingredient, pantry) {
     for (var i in pantry) {
         var item = pantry[i];
-        if (ingredient.name === i.name && ingredient.unit === i.unit && ingredient.quantity <= i.quantity) {
+        if (ingredient.name === item.name && ingredient.unit === item.unit && ingredient.quantity <= item.quantity) {
             i.quantity -= ingredient.quantity;
             return;
         }
@@ -111,7 +113,7 @@ function reduce(ingredient, pantry) {
 function allows(ingredient, pantry) {
     for (var i in pantry) {
         var item = pantry[i];
-        if (ingredient.name === i.name && ingredient.unit === i.unit && ingredient.quantity <= i.quantity) {
+        if (ingredient.name === item.name && ingredient.unit === item.unit && ingredient.quantity <= item.quantity) {
             return true;
         }
     }
