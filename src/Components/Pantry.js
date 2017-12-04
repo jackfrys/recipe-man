@@ -4,11 +4,14 @@ import Divider from 'material-ui/Divider';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
-
+import Delete from 'material-ui/svg-icons/action/delete';
 
 const style = {
     marginLeft: 20,
     width: "20%"
+};
+const buttonStyle = {
+    cursor: 'pointer',
 };
 
 class Pantry extends Component {
@@ -26,6 +29,8 @@ class Pantry extends Component {
         this.addIngredient = this.addIngredient.bind(this);
         this.renderIngredient = this.renderIngredient.bind(this);
         this.handleIngredientChange = this.handleIngredientChange.bind(this);
+        this.updatePantry = this.updatePantry.bind(this);
+        this.removeIngredient = this.removeIngredient.bind(this);
 
     }
 
@@ -54,7 +59,10 @@ class Pantry extends Component {
             'name': this.state.name
         });
         this.setState(newState);
+        this.updatePantry();
+    }
 
+    updatePantry() {
         fetch(`https://recipe-man-db.herokuapp.com/api/${this.state.pantry._id}/update`, {
             method: "PUT",
             headers: {
@@ -62,11 +70,12 @@ class Pantry extends Component {
             },
             body: JSON.stringify(this.state.pantry)
         })
-        .then(results => {
-            return results;
-        }).catch(function(error) {
+            .then(results => {
+                return results;
+            }).catch(function(error) {
             console.log(error);
         });
+
     }
 
     handleIngredientChange(field) {
@@ -78,10 +87,23 @@ class Pantry extends Component {
         };
     }
 
+    removeIngredient(idx) {
+        return function() {
+            let newState = Object.assign({}, this.state);
+            newState.pantry.ingredients.splice(idx, 1);
+            this.setState(newState);
+            this.updatePantry();
+        }.bind(this);
+    }
+
     renderIngredient(ingredient, idx) {
         return (
-            <li key={ingredient.name + idx}>
-                <p>{ingredient.quantity} {ingredient.unit} {ingredient.name}</p>
+            <li key={ingredient.name}>
+                <Delete
+                    onClick={this.removeIngredient(idx)}
+                    style={buttonStyle}
+                />
+                <p style={{'display': 'inline'}}>{ingredient.quantity} {ingredient.unit} {ingredient.name}</p>
             </li>
         );
     }
