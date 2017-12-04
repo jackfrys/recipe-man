@@ -101,10 +101,10 @@ app.post("/api/recipe/:rid/complete/:pid", function (req, res) {
 });
 
 function reduce(ingredient, pantry) {
-    for (var i in pantry) {
+    for (var i in pantry.toObject()) {
         var item = pantry[i];
         if (ingredient.name === item.name && ingredient.unit === item.unit && ingredient.quantity <= item.quantity) {
-            i.quantity -= ingredient.quantity;
+            item.quantity -= ingredient.quantity;
             return;
         }
     }
