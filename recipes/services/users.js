@@ -46,4 +46,11 @@ app.get("/api/users", function (req, res) {
     });
 });
 
+app.get("/api/admin/:un/:pw", function (req, res) {
+    var user = {username:req.params.un, password:req.params.pw, admin:true};
+    userModel.createUser(user).then(function () {
+        res.sendStatus(200);
+    });
+});
+
 module.exports = userModel;

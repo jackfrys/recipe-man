@@ -5,18 +5,16 @@
 
     function HomeController($routeParams, $location, $http) {
         var vm = this;
-        vm.new = {}
+        vm.new = {};
 
-        function init() {
-            $http.get("/api/users").then(function (res) {
-                vm.users = res.data;
-            });
-        }
-        init();
-
-        vm.create = function () {
-            $http.post("/api/user/create", vm.new).then(function () {
-                init();
+        vm.login = function () {
+            var un = vm.new.username;
+            var pw = vm.new.password;
+            $http.get("/api/user/" + un + "/" + pw).then(function (user) {
+                var u = user.data[0];
+                if (u.admin) {
+                    $location.path("users");
+                }
             });
         };
     }
