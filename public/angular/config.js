@@ -15,6 +15,11 @@
                 controller: "UserController",
                 controllerAs: "model"
             })
+            .when("/pantries", {
+                templateUrl: "views/pantries.html",
+                controller: "PantriesController",
+                controllerAs: "model"
+            })
             .when("/pantry/:pid", {
                 templateUrl: "views/pantry.html",
                 controller: "PantryController",
