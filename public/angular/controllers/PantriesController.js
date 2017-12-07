@@ -14,16 +14,25 @@
         init();
 
         vm.remove = function (index) {
-            $http.delete("/api/user/" + vm.pantries[index]._id);
+            var pantry = vm.pantries[index];
+            if (pantry.hasOwnProperty("_id")) {
+                $http.delete("/api/user/" + pantry._id);
+            }
             vm.pantries.splice(index, 1);
         };
 
         vm.update = function (index) {
-            $http.put("/api/user/" + vm.pantries[index]._id + "/update", vm.pantries[index]);
+            var pantry = vm.pantries[index];
+            if (pantry.hasOwnProperty("_id")) {
+                $http.put("/api/" + pantry._id + "/update", pantry);
+            }
         };
 
         vm.pantry = function (index) {
-            $location.path("/pantry/" + vm.pantries[index]._id);
+            var pantry = vm.pantries[index];
+            if (pantry.hasOwnProperty("_id")) {
+                $location.path("/pantry/" + pantry._id);
+            }
         };
     }
 })();
