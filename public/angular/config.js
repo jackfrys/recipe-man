@@ -10,7 +10,7 @@
                 controller: "HomeController",
                 controllerAs: "model"
             })
-            .when("/user/:uid", {
+            .when("/users", {
                 templateUrl: "views/user.html",
                 controller: "UserController",
                 controllerAs: "model"

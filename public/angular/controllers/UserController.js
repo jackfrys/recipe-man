@@ -5,42 +5,21 @@
 
     function UserController($routeParams, $location, $http) {
         var vm = this;
-        var id = $routeParams["uid"];
-        vm.id = id;
 
         function init() {
-            $http.get("/api/user/" + id).then(function (res) {
-                vm.user = res.data;
-            });
-
-            $http.get("/api/" + id + "/recipes").then(function (res) {
-                vm.recipes = res.data;
-            });
-
-            $http.get("/api/" + id + "/shared").then(function (res) {
-                vm.shared = res.data;
-            });
-
-            $http.get("/api/" + id + "/pantry").then(function (res) {
-                vm.pantries = res.data;
+            $http.get("/api/users").then(function (users) {
+                vm.users = users.data;
             });
         }
         init();
 
-        vm.delete = function () {
-            $http.delete("/api/user/" + id);
+        vm.remove = function (index) {
+            $http.delete("/api/user/" + vm.users[index]._id);
+            vm.users.splice(index, 1);
         };
 
-        vm.update = function () {
-            $http.put("/api/user/" + id + "/update", vm.user).then(function () {
-                init();
-            });
-        };
-
-        vm.createPantry = function () {
-            $http.post("/api/" + id + "/pantry/add", {name:"My new Pantry"}).then(function () {
-                init();
-            });
+        vm.update = function (index) {
+            $http.put("/api/user/" + vm.users[index]._id + "/update", vm.users[index]);
         };
     }
 })();

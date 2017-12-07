@@ -1,29 +1,22 @@
-<h1>Credentials</h1>
-
-<form>
-    <input ng-model="model.user.name" placeholder="name">
-    <input ng-model="model.user.email" placeholder="email" type="email">
-    <input ng-model="model.user.username" placeholder="username">
-    <input ng-model="model.user.password" placeholder="password">
-    <button ng-click="model.update()">Update</button>
-</form>
-
-<button ng-click="model.delete()" href="#!/">Delete</button>
-
-<button href="#!/user/{{model.id}}/pantry">View pantry</button>
-
-<h1>Pantries</h1>
-<div ng-repeat="pantry in model.pantries">
-    <a href="#!/pantry/{{pantry._id}}">{{pantry.name}}</a>
-</div>
-<button ng-click="model.createPantry()">Create new Pantry</button>
-
-<h1>Recipes</h1>
-<div ng-repeat="recipe in model.recipes">
-    <a href="#!/recipe/{{recipe._id}}">{{recipe.title}}</a>
-</div>
-
-<h1>Shared</h1>
-<div ng-repeat="recipe in model.shared">
-    <a href="#!/recipe/{{recipe._id}}">{{recipe.title}}</a>
+<div class="container-fluid">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Name</th>
+            <th>Email</th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in model.users">
+                <td><input ng-model="user.username" placeholder="username"></td>
+                <td><input ng-model="user.password" placeholder="password"></td>
+                <td><input ng-model="user.name" placeholder="name"></td>
+                <td><input ng-model="user.email" placeholder="email"></td>
+                <td><button ng-click="model.remove($index)">Remove</button></td>
+                <td><button ng-click="model.update($index)">Update</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
