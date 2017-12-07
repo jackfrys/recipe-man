@@ -21,5 +21,13 @@
         vm.update = function (index) {
             $http.put("/api/user/" + vm.users[index]._id + "/update", vm.users[index]);
         };
+
+        vm.pantry = function (index) {
+            $http.get("/api/" + vm.users[index]._id + "/pantry").then(function (pantry) {
+                if (pantry.data.length > 0) {
+                    $location.path("/pantry/" + pantry.data[0]._id);
+                }
+            });
+        };
     }
 })();
