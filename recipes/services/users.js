@@ -53,4 +53,10 @@ app.get("/api/admin/:un/:pw", function (req, res) {
     });
 });
 
+app.get("/api/username/:un", function (req, res) {
+    userModel.findOne({username:req.params.un}).then(function (user) {
+        res.json(user);
+    });
+});
+
 module.exports = userModel;
