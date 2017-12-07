@@ -19,7 +19,18 @@
         };
 
         vm.update = function (index) {
-            $http.put("/api/category/" + vm.categories[index]._id + "/update", vm.categories[index]);
+            var category = vm.categories[index];
+            if (category.hasOwnProperty("_id")) {
+                $http.put("/api/category/" + category._id + "/update", category);
+            } else {
+                $http.post("/api/category/create", category).then(function (category) {
+                    vm.categories[index] = category.data;
+                });
+            }
+        };
+
+        vm.create = function () {
+            vm.categories.push({});
         };
     }
 })();

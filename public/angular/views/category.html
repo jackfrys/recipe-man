@@ -4,11 +4,12 @@
             <thead>
             <th>Name</th>
             <th>Description</th>
+            <th><button ng-click="model.create()">Create</button></th>
             </thead>
             <tbody>
-            <tr ng-repeat="user in model.users">
-                <td><input ng-model="category.name" placeholder="username"></td>
-                <td><input ng-model="category.description" placeholder="password"></td>
+            <tr ng-repeat="category in model.categories">
+                <td><input ng-model="category.name" placeholder="name"></td>
+                <td><input ng-model="category.description" placeholder="description"></td>
                 <td><button ng-click="model.remove($index)">Remove</button></td>
                 <td><button ng-click="model.update($index)">Update</button></td>
             </tr>
