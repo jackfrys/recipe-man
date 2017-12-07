@@ -12,3 +12,6 @@ The React frontend lives in a separate repository - it is set to use a Heroku in
 The remote backend is located [here](recipe-man-db.herokuapp.com).
 
 The remote frontend is located [here](recipe-man-frontend.herokuapp.com) and the repository is [here](https://github.com/trentduffy/recipe-man-frontend). The frontend can be run locally, but it will still query the remote backend.
+
+## Editing all objects
+The admin view can be accessed in the backend repo in the `angular` subdirectory. It provides a simple Angular-based UI for editing all objects. You must log in with an admin account - `admin:admin`.
