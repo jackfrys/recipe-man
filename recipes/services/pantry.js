@@ -32,4 +32,10 @@ app.get("/api/pantries", function (req, res) {
     });
 });
 
+app.get("/api/pantryusers", function (req, res) {
+    pantryModel.find({}).populate({path:"user"}).then(function (data) {
+        res.json(data);
+    });
+});
+
 module.exports = app;
