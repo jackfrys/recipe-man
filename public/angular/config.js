@@ -25,6 +25,11 @@
                 controller: "PantryController",
                 controllerAs: "model"
             })
+            .when("/recipes", {
+                templateUrl: "views/recipes.html",
+                controller: "RecipesController",
+                controllerAs: "model"
+            })
             .when("/recipe/:rid", {
                 templateUrl: "views/recipe.html",
                 controller: "RecipeController",
