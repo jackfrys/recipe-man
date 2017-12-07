@@ -1,0 +1,18 @@
+<div class="container-fluid">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <th>Name</th>
+            <th>Description</th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in model.users">
+                <td><input ng-model="category.name" placeholder="username"></td>
+                <td><input ng-model="category.description" placeholder="password"></td>
+                <td><button ng-click="model.remove($index)">Remove</button></td>
+                <td><button ng-click="model.update($index)">Update</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -34,6 +34,11 @@
                 templateUrl: "views/recipe.html",
                 controller: "RecipeController",
                 controllerAs: "model"
+            })
+            .when("/category", {
+                templateUrl: "views/category.html",
+                controller: "CategoryController",
+                controllerAs: "model"
             });
     }
 })();
