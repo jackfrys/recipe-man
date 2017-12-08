@@ -4,7 +4,7 @@ var db = require("./database");
 var pantryModel = mongoose.model("PantryModel", pantrySchema);
 
 pantryModel.pantryForUser = function (userId) {
-    return pantryModel.find({user:mongoose.Schema.Types.ObjectId(userId)});
+    return pantryModel.find({user:mongoose.Types.ObjectId(userId)});
 };
 
 pantryModel.updatePantry = function (pantryId, pantry) {
@@ -12,7 +12,7 @@ pantryModel.updatePantry = function (pantryId, pantry) {
 };
 
 pantryModel.addPantryForUser = function (userId, pantry) {
-    pantry.user = mongoose.Schema.Types.ObjectId(userId);
+    pantry.user = mongoose.Types.ObjectId(userId);
     return pantryModel.create(pantry);
 };
 
