@@ -3,8 +3,7 @@ var pantrySchema = mongoose.Schema({
     name: String,
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        rel: "User",
-        required: true
+        rel: "User"
     },
     ingredients: {
         type: [{
