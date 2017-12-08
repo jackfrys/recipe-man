@@ -1,10 +1,20 @@
-<form>
-    <input ng-model="model.recipe.title">
-</form>
-<div ng-repeat="item in model.recipe.steps">
-    <input ng-model="item.description" placeholder="item"> <button ng-click="model.remove($index)">Remove</button>
+<div class="container-fluid">
+    <h1><input ng-model="model.recipe.title"></h1>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <th>Step</th>
+            <th><button ng-click="model.add()">Add item</button></th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="step in model.recipe.steps">
+                <td><input ng-model="step.description" placeholder="item"></td>
+                <td><button ng-click="model.remove($index)">Remove</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button ng-click="model.update()">Save</button>
 </div>
-
-<button ng-click="model.add()">Add item</button>
-
-<button ng-click="model.update()">Save</button>
