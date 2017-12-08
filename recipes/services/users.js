@@ -14,7 +14,9 @@ app.post("/api/user/create", function (req, res) {
     userModel.findByCredentials(user.username, user.password).then(function (data) {
         if (data.length === 0) {
             userModel.createUser(user).then(function (comp) {
-                res.json(comp);
+                pantryModel.addPantryForUser(comp._id, {name:comp.username + "'s Pantry"}).then(function () {
+                    res.json(comp);
+                });
             });
         } else {
             res.sendStatus(400);

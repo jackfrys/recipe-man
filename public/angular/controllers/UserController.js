@@ -29,5 +29,10 @@
                 }
             });
         };
+
+        vm.addPantry = function (index) {
+            var obj = {name:vm.users[index].username + "'s Pantry"};
+            $http.post("/api/" + vm.users[index]._id + "/pantry/add", obj);
+        };
     }
 })();
