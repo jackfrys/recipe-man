@@ -4,7 +4,7 @@
 
 `npm start`
 
-to run the backend server.
+to run the backend server. Note: you must have an instance of mongoDB to run locally.
 
 Each of the http-based API calls can be performed with via the instructions in `API.md`.
 
