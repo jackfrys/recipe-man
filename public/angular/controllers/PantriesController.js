@@ -16,7 +16,7 @@
         vm.remove = function (index) {
             var pantry = vm.pantries[index];
             if (pantry.hasOwnProperty("_id")) {
-                $http.delete("/api/user/" + pantry._id);
+                $http.delete("/api/pantry/" + pantry._id);
             }
             vm.pantries.splice(index, 1);
         };

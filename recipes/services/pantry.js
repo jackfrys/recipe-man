@@ -38,4 +38,10 @@ app.get("/api/pantryusers", function (req, res) {
     });
 });
 
+app.delete("/api/pantry/:pid", function (req, res) {
+    pantryModel.findByIdAndRemove(req.params.pid).then(function () {
+        res.sendStatus(200);
+    });
+});
+
 module.exports = app;
