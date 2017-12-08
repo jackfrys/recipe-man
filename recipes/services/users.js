@@ -12,7 +12,7 @@ app.get("/api/user/:uid", function (req, res) {
 app.post("/api/user/create", function (req, res) {
     var user = req.body;
     userModel.findByCredentials(user.username, user.password).then(function (data) {
-        if (data.length == 0) {
+        if (data.length === 0) {
             userModel.createUser(user).then(function (comp) {
                 res.json(comp);
             });

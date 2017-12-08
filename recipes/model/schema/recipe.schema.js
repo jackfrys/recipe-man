@@ -4,20 +4,26 @@ var recipeSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         rel: "User"
     },
-    steps: [String],
+    steps: {type: [String], default: ""},
     ingredients: [{
         name: String,
         quantity: Number,
         unit: String
     }],
-    shared: [{
-        type: mongoose.Schema.Types.ObjectId,
-        rel: "User"
-    }],
-    categories: [{
-        type: mongoose.Schema.Types.ObjectId,
-        rel: "Category"
-    }],
-    title: String
+    shared: {
+        type: [{
+            type: mongoose.Schema.Types.ObjectId,
+            rel: "User"
+        }],
+        default: []
+    },
+    categories: {
+        type: [{
+            type: mongoose.Schema.Types.ObjectId,
+            rel: "Category"
+        }],
+        default: []
+    },
+    title: {type: String, default: ""}
 }, {collection: "Recipe"});
 module.exports = recipeSchema;

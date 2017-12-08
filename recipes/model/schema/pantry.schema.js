@@ -3,12 +3,16 @@ var pantrySchema = mongoose.Schema({
     name: String,
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        rel: "User"
+        rel: "User",
+        required: true
     },
-    ingredients: [{
-        name: String,
-        quantity: Number,
-        unit: String
-    }]
+    ingredients: {
+        type: [{
+            name: {type: String, default: ""},
+            quantity: {type: String, default: 0},
+            unit: {type: String, default: 0}
+        }],
+        default: []
+    }
 }, {collection: "Pantry"});
 module.exports = pantrySchema;
