@@ -10,7 +10,7 @@ app.get("/api/:uid/recipes", function (req, res) {
 });
 
 app.get("/api/:uid/shared", function (req, res) {
-    recipeModel.sharedWithUser(req.params.uid).then(function (data) {
+    recipeModel.find({shared: req.params.uid}).populate("categories").then(function (data) {
         res.json(data);
     });
 });
