@@ -33,9 +33,9 @@ class Recipe extends Component {
     componentWillReceiveProps(nextProps) {
         if (typeof nextProps.userPantryID !== undefined && typeof nextProps.recipe.id !== undefined) {
 
-            console.log(`https://recipe-man-db.herokuapp.com/api/recipe/${this.props.recipe._id}/complete/${this.props.userPantryID}`);
+            console.log(`https://recipe-man-db.herokuapp.com/api/recipe/${this.props.recipe._id}/complete/${nextProps.userPantryID}`);
 
-            fetch(`https://recipe-man-db.herokuapp.com/api/recipe/${this.props.recipe._id}/complete/${this.props.userPantryID}`)
+            fetch(`https://recipe-man-db.herokuapp.com/api/recipe/${this.props.recipe._id}/complete/${nextProps.userPantryID}`)
                 .then(results => {
                     return results.json();
                 }).then(data => {
@@ -164,7 +164,7 @@ class Recipe extends Component {
 
     completeRecipe() {
 
-        fetch(`https://recipe-man-db.herokuapp.com/api/recipe/${this.props.recipe._id}/complete/${this.props.userPantryID}`, {
+        fetch(`https://recipe-man-db.herokuapp.com/api/recipe/${this.props.recipe._id}/complete/5a1f7bb46e72390004960cab`, {
             method: 'POST'
         })
             .then(results => {

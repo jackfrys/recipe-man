@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {FormControl} from 'react-bootstrap';
 import '../css/App.css';
-import logo from '../css/logo.svg';
 import {Redirect } from 'react-router'
 
 
@@ -54,11 +53,9 @@ class Login extends Component {
                 <Redirect to={`/home/${this.state.id}`} /> :
             <div className="App">
                 <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo"/>
-                    <h1 className="App-title">Welcome to React</h1>
+                    <h1 className="App-title">Welcome to Recipe Man</h1>
                 </header>
                 <p className="App-intro">
-                    To get started, edit <code>src/App.js</code> and save to reload.
                 </p>
                 <form>
                     <FormControl
