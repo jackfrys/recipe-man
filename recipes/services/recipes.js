@@ -4,7 +4,7 @@ var recipeModel = require("../model/recipe.model");
 var pantryModel = require("../model/pantry.model");
 
 app.get("/api/:uid/recipes", function (req, res) {
-    recipeModel.find({user: mongoose.Types.ObjectId(req.params.uid)}).populate("shared").then(function (data) {
+    recipeModel.find({user: mongoose.Types.ObjectId(req.params.uid)}).populate("categories").then(function (data) {
         res.json(data);
     });
 });
