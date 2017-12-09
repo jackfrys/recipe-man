@@ -6,24 +6,32 @@ var pantryModel = require("../model/pantry.model");
 app.get("/api/:uid/recipes", function (req, res) {
     recipeModel.find({user: mongoose.Types.ObjectId(req.params.uid)}).populate("categories").then(function (data) {
         res.json(data);
+    }).catch(function () {
+        res.sendStatus(400);
     });
 });
 
 app.get("/api/:uid/shared", function (req, res) {
     recipeModel.find({shared: req.params.uid}).populate("categories").then(function (data) {
         res.json(data);
+    }).catch(function () {
+        res.sendStatus(400);
     });
 });
 
 app.get("/api/recipe/:rid", function (req, res) {
     recipeModel.findById(req.params.rid).then(function (data) {
         res.json(data);
+    }).catch(function () {
+        res.sendStatus(400);
     });
 });
 
 app.get("/api/recipecat/:rid", function (req, res) {
     recipeModel.findById(req.params.rid).populate("categories").populate("shared").then(function (data) {
         res.json(data);
+    }).catch(function () {
+        res.sendStatus(400);
     });
 });
 
@@ -38,12 +46,16 @@ app.post("/api/:uid/recipe/create", function (req, res) {
 app.delete("/api/:rid", function (req, res) {
     recipeModel.deleteRecipe(req.params.rid).then(function () {
         res.send(200);
+    }).catch(function () {
+        res.sendStatus(400);
     });
 });
 
 app.put("/api/recipe/:rid/update", function (req, res) {
     recipeModel.updateRecipe(req.params.rid, req.body).then(function () {
         res.send(200);
+    }).catch(function () {
+        res.sendStatus(400);
     });
 });
 
@@ -52,7 +64,11 @@ app.post("/api/:rid/share/:uid", function (req, res) {
         data.shared.push(req.params.uid);
         recipeModel.findByIdAndUpdate(req.params.rid, {$set:data}).then(function () {
             res.send(200);
+        }).catch(function () {
+            res.sendStatus(400);
         });
+    }).catch(function () {
+        res.sendStatus(400);
     });
 });
 
@@ -67,24 +83,32 @@ app.put("/api/:rid/category/:cid", function (req, res) {
 app.delete("/api/:rid/category/:cid", function (req, res) {
     recipeModel.removeCategory(req.params.rid, req.params.cid).then(function () {
         res.send(200);
+    }).catch(function () {
+        res.sendStatus(400);
     });
 });
 
 app.get("/api/recipes", function (req, res) {
     recipeModel.allRecipes().then(function (data) {
         res.json(data);
+    }).catch(function () {
+        res.sendStatus(400);
     });
 });
 
 app.get("/api/recipescats", function (req, res) {
     recipeModel.find({}).populate("categories").then(function (data) {
         res.json(data);
+    }).catch(function () {
+        res.sendStatus(400);
     });
 });
 
 app.get("/api/recipes/users", function (req, res) {
     recipeModel.find({}).populate("user").then(function (data) {
         res.json(data);
+    }).catch(function () {
+        res.sendStatus(400);
     });
 });
 

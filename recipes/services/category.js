@@ -11,6 +11,8 @@ app.get("/api/categories", function (req, res) {
 app.get("/api/category/:cid", function (req, res) {
     categoryModel.categoryForId(req.params.cid).then(function (data) {
         res.json(data);
+    }).catch(function (err) {
+        res.sendStatus(400);
     });
 });
 
