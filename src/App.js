@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Login from './Components/Login.js'
 import Home from './Components/Home.js'
+import Register from './Components/Register.js'
 
 
 class App extends Component {
@@ -14,6 +15,7 @@ class App extends Component {
             <BrowserRouter >
                <Switch>
                    <Route exact path="/" component={Login}/>
+                   <Route exact path="/register" component={Register}/>
                    <Route path="/home/:id" component={Home}/>
                </Switch>
             </BrowserRouter>
