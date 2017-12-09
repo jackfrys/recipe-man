@@ -7,6 +7,7 @@
         var vm = this;
         var id = $routeParams["rid"];
         vm.newCat = "";
+        vm.newShare = "";
 
         function init() {
             $http.get("/api/recipecat/" + id).then(function (res) {
@@ -57,5 +58,19 @@
         vm.removeCategory = function (item) {
             vm.recipe.categories.splice(item, 1);
         };
+
+        vm.addShare = function () {
+            $http.get("/api/username/" + vm.newShare).then(function (cat) {
+                if (cat.data) {
+                    $http.post("/api/" + id + "/share/" + cat.data._id).then(function () {
+                        init();
+                    });
+                }
+            });
+        };
+
+        vm.removeShare = function (item) {
+            vm.recipe.shared.splice(item, 1);
+        }
     }
 })();

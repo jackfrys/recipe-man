@@ -22,7 +22,7 @@ app.get("/api/recipe/:rid", function (req, res) {
 });
 
 app.get("/api/recipecat/:rid", function (req, res) {
-    recipeModel.findById(req.params.rid).populate("categories").then(function (data) {
+    recipeModel.findById(req.params.rid).populate("categories").populate("shared").then(function (data) {
         res.json(data);
     });
 });
