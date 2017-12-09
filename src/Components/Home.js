@@ -53,6 +53,8 @@ class Home extends Component {
                 return results.json();
             }).then(data => {
             let recipes = data;
+            console.log(recipes);
+
             this.setState({
                 "sharedRecipes": recipes
             });
