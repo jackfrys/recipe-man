@@ -31,8 +31,16 @@
             vm.recipe.steps.push({});
         };
 
+        vm.addIngredient = function () {
+            vm.recipe.ingredients.push({});
+        };
+
         vm.remove = function (item) {
             vm.recipe.steps.splice(item, 1);
+        };
+
+        vm.removeIngredient = function (item) {
+            vm.recipe.ingredients.splice(item, 1);
         };
     }
 })();

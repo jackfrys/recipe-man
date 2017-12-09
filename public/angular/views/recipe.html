@@ -14,6 +14,23 @@
             </tr>
             </tbody>
         </table>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <th>Item name</th>
+                <th>Quantity</th>
+                <th><button ng-click="model.addIngredient()">Add item</button></th>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in model.recipe.ingredients">
+                    <td><input ng-model="item.name" placeholder="item"></td>
+                    <td><input ng-model="item.quantity" placeholder="quantity"> <input ng-model="item.unit" placeholder="unit"></span></td>
+                    <td><button ng-click="model.removeIngredient($index)">Remove</button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <button ng-click="model.update()">Save</button>
