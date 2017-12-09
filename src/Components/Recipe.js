@@ -164,7 +164,7 @@ class Recipe extends Component {
 
     completeRecipe() {
 
-        fetch(`https://recipe-man-db.herokuapp.com/api/recipe/${this.props.recipe._id}/complete/5a1f7bb46e72390004960cab`, {
+        fetch(`https://recipe-man-db.herokuapp.com/api/recipe/${this.props.recipe._id}/complete/${this.props.userPantryID}`, {
             method: 'POST'
         })
             .then(results => {
