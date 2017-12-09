@@ -71,6 +71,6 @@
 
         vm.removeShare = function (item) {
             vm.recipe.shared.splice(item, 1);
-        }
+        };
     }
 })();
