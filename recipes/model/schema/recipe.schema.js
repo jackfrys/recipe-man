@@ -13,14 +13,14 @@ var recipeSchema = mongoose.Schema({
     shared: {
         type: [{
             type: mongoose.Schema.Types.ObjectId,
-            rel: "User"
+            ref: "UserModel"
         }],
         default: []
     },
     categories: {
         type: [{
             type: mongoose.Schema.Types.ObjectId,
-            rel: "Category"
+            ref: "CategoryModel"
         }],
         default: []
     },

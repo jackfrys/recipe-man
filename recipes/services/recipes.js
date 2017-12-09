@@ -21,6 +21,12 @@ app.get("/api/recipe/:rid", function (req, res) {
     });
 });
 
+app.get("/api/recipecat/:rid", function (req, res) {
+    recipeModel.findById(req.params.rid).populate("categories").then(function (data) {
+        res.json(data);
+    });
+});
+
 app.post("/api/:uid/recipe/create", function (req, res) {
     recipeModel.createRecipe(req.params.uid, req.body).then(function (data) {
         res.json(data);
@@ -66,6 +72,12 @@ app.delete("/api/:rid/category/:cid", function (req, res) {
 
 app.get("/api/recipes", function (req, res) {
     recipeModel.allRecipes().then(function (data) {
+        res.json(data);
+    });
+});
+
+app.get("/api/recipescats", function (req, res) {
+    recipeModel.find({}).populate("categories").then(function (data) {
         res.json(data);
     });
 });

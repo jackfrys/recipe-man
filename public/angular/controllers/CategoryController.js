@@ -21,7 +21,7 @@
         vm.update = function (index) {
             var category = vm.categories[index];
             if (category.hasOwnProperty("_id")) {
-                $http.put("/api/category/" + category._id + "/update", category);
+                $http.put("/api/category/" + category._id + "/modify", category);
             } else {
                 $http.post("/api/category/create", category).then(function (category) {
                     vm.categories[index] = category.data;

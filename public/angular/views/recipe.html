@@ -31,6 +31,22 @@
                 </tbody>
             </table>
         </div>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <th>Category</th>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in model.recipe.categories">
+                    <td><input ng-model="item.name" placeholder="item"></td>
+                    <td><button ng-click="model.removeCategory($index)">Remove</button></td>
+                </tr>
+                </tbody>
+            </table>
+            <input ng-model="model.newCat" placeholder="New Category">
+            <button ng-click="model.addCategory()">Add category</button>
+        </div>
     </div>
 
     <button ng-click="model.update()">Save</button>

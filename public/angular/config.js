@@ -35,7 +35,7 @@
                 controller: "RecipeController",
                 controllerAs: "model"
             })
-            .when("/category", {
+            .when("/categories", {
                 templateUrl: "views/category.html",
                 controller: "CategoryController",
                 controllerAs: "model"
