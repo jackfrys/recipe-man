@@ -70,6 +70,12 @@ app.get("/api/recipes", function (req, res) {
     });
 });
 
+app.get("/api/recipes/users", function (req, res) {
+    recipeModel.find({}).populate("user").then(function (data) {
+        res.json(data);
+    });
+});
+
 app.get("/api/recipe/:rid/complete/:pid", function (req, res) {
     recipeModel.findById(req.params.rid).then(function (recipe) {
         pantryModel.findById(req.params.pid).then(function (pantry) {

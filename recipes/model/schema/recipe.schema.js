@@ -2,9 +2,9 @@ var mongoose = require("mongoose");
 var recipeSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        rel: "User"
+        ref: "UserModel"
     },
-    steps: {type: [String], default: ""},
+    steps: {type: [String], default: []},
     ingredients: [{
         name: String,
         quantity: Number,

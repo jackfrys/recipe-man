@@ -4,12 +4,12 @@ var db = require("./database");
 var recipeModel = mongoose.model("RecipeModel", recipeSchema);
 
 recipeModel.createRecipe = function (userId, recipe) {
-    recipe.user = userId;
+    recipe.user = mongoose.Types.ObjectId(userId);
     return recipeModel.create(recipe);
 };
 
 recipeModel.recipesByUser = function (userId) {
-    return recipeModel.find({user:userId});
+    return recipeModel.find({user:mongoose.Types.ObjectId(userId)});
 };
 
 recipeModel.sharedWithUser = function (userId) {
@@ -21,7 +21,7 @@ recipeModel.updateRecipe = function (recipeId, recipe) {
 };
 
 recipeModel.shareRecipe = function (recipeId, userId) {
-    return recipeModel.findByIdAndUpdate(recipeId, {$push:{shared:mongoose.Schema.Types.ObjectId(userId)}});
+    return recipeModel.findByIdAndUpdate(recipeId, {$push:{shared:mongoose.Types.ObjectId(userId)}});
 };
 
 recipeModel.deleteRecipe = function (recipeId) {

@@ -7,14 +7,14 @@
         var vm = this;
 
         function init() {
-            $http.get("/api/recipes").then(function (recipes) {
+            $http.get("/api/recipes/users").then(function (recipes) {
                 vm.recipes = recipes.data;
             });
         }
         init();
 
         vm.remove = function (index) {
-            $http.delete("/api/recipe/" + vm.recipes[index]._id);
+            $http.delete("/api/" + vm.recipes[index]._id);
             vm.recipes.splice(index, 1);
         };
 

@@ -31,8 +31,18 @@
         };
 
         vm.addPantry = function (index) {
-            var obj = {name:vm.users[index].username + "'s Pantry"};
-            $http.post("/api/" + vm.users[index]._id + "/pantry/add", obj);
+            var user = vm.users[index];
+            var obj = {name:user.username + "'s Pantry"};
+
+            $http.put("/api/user/" + vm.users[index]._id + "/update", vm.users[index]).then(function () {
+                $http.post("/api/" + user._id + "/pantry/add", obj);
+            });
+        };
+
+        vm.addRecipe = function (index) {
+            $http.put("/api/user/" + vm.users[index]._id + "/update", vm.users[index]).then(function () {
+                $http.post("/api/" + vm.users[index]._id + "/recipe/create");
+            });
         };
     }
 })();
