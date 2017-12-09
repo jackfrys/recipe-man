@@ -61,7 +61,7 @@ class Recipe extends Component {
         for (let x = 0; x < this.props.recipe.categories.length; x++) {
             result.push(
                 <p>
-                    {this.props.recipe.categories[x]}
+                    {this.props.recipe.categories[x].name}
                 </p>
             )
         }
