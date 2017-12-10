@@ -1,0 +1,17 @@
+<div class="container-fluid">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <th>Name</th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="pantry in model.pantries">
+                <td><input ng-model="pantry.name" placeholder="username"></td>
+                <td><button ng-click="model.pantry($index)">Edit Pantry</button></td>
+                <td><button ng-click="model.remove($index)">Remove</button></td>
+                <td><button ng-click="model.update($index)">Update</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

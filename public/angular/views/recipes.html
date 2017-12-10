@@ -1,0 +1,19 @@
+<div class="container-fluid">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <th>Name</th>
+            <th>User</th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="recipe in model.recipes">
+                <td><input ng-model="recipe.title" placeholder="name"></td>
+                <td>{{recipe.user.username}}</td>
+                <td><button ng-click="model.recipe($index)">Edit Recipe</button></td>
+                <td><button ng-click="model.remove($index)">Remove</button></td>
+                <td><button ng-click="model.update($index)">Update</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

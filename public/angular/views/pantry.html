@@ -1,0 +1,24 @@
+<div class="container-fluid">
+    <h1><input ng-model="model.pantry.name"></h1>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <th>Item name</th>
+            <th>Quantity</th>
+            <th>Completed</th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in model.pantry.ingredients">
+                <td><input ng-model="item.name" placeholder="item"></td>
+                <td><input ng-model="item.quantity" placeholder="quantity"> <input ng-model="item.unit" placeholder="unit"></span></td>
+                <td><button ng-click="model.remove($index)">Remove</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button ng-click="model.add()">Add item</button>
+
+    <button ng-click="model.update()">Save</button>
+</div>

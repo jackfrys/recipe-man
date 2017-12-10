@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Name</th>
+            <th>Email</th>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in model.users">
+                <td><input ng-model="user.username" placeholder="username"></td>
+                <td><input ng-model="user.password" placeholder="password"></td>
+                <td><input ng-model="user.name" placeholder="name"></td>
+                <td><input ng-model="user.email" placeholder="email"></td>
+                <td><button ng-click="model.addRecipe($index)">Add Recipe</button></td>
+                <td><button ng-click="model.addPantry($index)">Add Pantry</button></td>
+                <td><button ng-click="model.pantry($index)">Edit Pantry</button></td>
+                <td><button ng-click="model.remove($index)">Remove</button></td>
+                <td><button ng-click="model.update($index)">Update</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
