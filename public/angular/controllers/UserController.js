@@ -11,6 +11,7 @@
                 vm.users = users.data;
             });
         }
+
         init();
 
         vm.remove = function (index) {
@@ -32,7 +33,7 @@
 
         vm.addPantry = function (index) {
             var user = vm.users[index];
-            var obj = {name:user.username + "'s Pantry"};
+            var obj = {name: user.username + "'s Pantry"};
 
             $http.put("/api/user/" + vm.users[index]._id + "/update", vm.users[index]).then(function () {
                 $http.post("/api/" + user._id + "/pantry/add", obj);

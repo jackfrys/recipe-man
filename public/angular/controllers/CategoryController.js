@@ -11,6 +11,7 @@
                 vm.categories = categories.data;
             });
         }
+
         init();
 
         vm.remove = function (index) {

@@ -16,7 +16,7 @@ app.post("/api/user/create", function (req, res) {
     userModel.findByCredentials(user.username, user.password).then(function (data) {
         if (data.length === 0) {
             userModel.createUser(user).then(function (comp) {
-                pantryModel.addPantryForUser(comp._id, {name:comp.username + "'s Pantry"}).then(function () {
+                pantryModel.addPantryForUser(comp._id, {name: comp.username + "'s Pantry"}).then(function () {
                     res.json(comp);
                 });
             });
@@ -61,7 +61,7 @@ app.get("/api/users", function (req, res) {
 });
 
 app.get("/api/admin/:un/:pw", function (req, res) {
-    var user = {username:req.params.un, password:req.params.pw, admin:true};
+    var user = {username: req.params.un, password: req.params.pw, admin: true};
     userModel.createUser(user).then(function () {
         res.sendStatus(200);
     }).catch(function () {
@@ -70,7 +70,7 @@ app.get("/api/admin/:un/:pw", function (req, res) {
 });
 
 app.get("/api/username/:un", function (req, res) {
-    userModel.findOne({username:req.params.un}).then(function (user) {
+    userModel.findOne({username: req.params.un}).then(function (user) {
         res.json(user);
     }).catch(function () {
         res.sendStatus(400);

@@ -11,8 +11,11 @@
             <tbody>
             <tr ng-repeat="item in model.pantry.ingredients">
                 <td><input ng-model="item.name" placeholder="item"></td>
-                <td><input ng-model="item.quantity" placeholder="quantity"> <input ng-model="item.unit" placeholder="unit"></span></td>
-                <td><button ng-click="model.remove($index)">Remove</button></td>
+                <td><input ng-model="item.quantity" placeholder="quantity"> <input ng-model="item.unit"
+                                                                                   placeholder="unit"></span></td>
+                <td>
+                    <button ng-click="model.remove($index)">Remove</button>
+                </td>
             </tr>
             </tbody>
         </table>

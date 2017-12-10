@@ -5,12 +5,16 @@
         <table class="table table-striped">
             <thead>
             <th>Step</th>
-            <th><button ng-click="model.add()">Add item</button></th>
+            <th>
+                <button ng-click="model.add()">Add item</button>
+            </th>
             </thead>
             <tbody>
             <tr ng-repeat="step in model.recipe.steps">
                 <td><input ng-model="step.description" placeholder="item"></td>
-                <td><button ng-click="model.remove($index)">Remove</button></td>
+                <td>
+                    <button ng-click="model.remove($index)">Remove</button>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -20,13 +24,18 @@
                 <thead>
                 <th>Item name</th>
                 <th>Quantity</th>
-                <th><button ng-click="model.addIngredient()">Add item</button></th>
+                <th>
+                    <button ng-click="model.addIngredient()">Add item</button>
+                </th>
                 </thead>
                 <tbody>
                 <tr ng-repeat="item in model.recipe.ingredients">
                     <td><input ng-model="item.name" placeholder="item"></td>
-                    <td><input ng-model="item.quantity" placeholder="quantity"> <input ng-model="item.unit" placeholder="unit"></span></td>
-                    <td><button ng-click="model.removeIngredient($index)">Remove</button></td>
+                    <td><input ng-model="item.quantity" placeholder="quantity"> <input ng-model="item.unit"
+                                                                                       placeholder="unit"></span></td>
+                    <td>
+                        <button ng-click="model.removeIngredient($index)">Remove</button>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -40,7 +49,9 @@
                 <tbody>
                 <tr ng-repeat="item in model.recipe.categories">
                     <td>{{item.name}}</td>
-                    <td><button ng-click="model.removeCategory($index)">Remove</button></td>
+                    <td>
+                        <button ng-click="model.removeCategory($index)">Remove</button>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -56,7 +67,9 @@
                 <tbody>
                 <tr ng-repeat="item in model.recipe.shared">
                     <td>{{item.username}}</td>
-                    <td><button ng-click="model.removeShare($index)">Remove</button></td>
+                    <td>
+                        <button ng-click="model.removeShare($index)">Remove</button>
+                    </td>
                 </tr>
                 </tbody>
             </table>

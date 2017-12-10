@@ -8,7 +8,7 @@ userModel.createUser = function (user) {
 };
 
 userModel.updateUser = function (id, user) {
-    return userModel.findByIdAndUpdate(id, {$set:user});
+    return userModel.findByIdAndUpdate(id, {$set: user});
 };
 
 userModel.getUser = function (id) {
@@ -20,7 +20,7 @@ userModel.deleteUser = function (id) {
 };
 
 userModel.findByCredentials = function (username, password) {
-    return userModel.find({username:username, password:password});
+    return userModel.find({username: username, password: password});
 };
 
 userModel.allUsers = function () {

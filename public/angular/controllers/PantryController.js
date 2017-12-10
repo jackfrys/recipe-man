@@ -12,6 +12,7 @@
                 vm.pantry = res.data;
             });
         }
+
         init();
 
         vm.update = function () {

@@ -11,6 +11,7 @@
                 vm.pantries = pantries.data;
             });
         }
+
         init();
 
         vm.remove = function (index) {

@@ -35,7 +35,7 @@ app.post("/api/category/create", function (req, res) {
 });
 
 app.get("/api/categoryname/:name", function (req, res) {
-    categoryModel.findOne({name:req.params.name}).then(function (cat) {
+    categoryModel.findOne({name: req.params.name}).then(function (cat) {
         res.json(cat);
     });
 });

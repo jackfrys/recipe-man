@@ -4,11 +4,11 @@ var db = require("./database");
 var pantryModel = mongoose.model("PantryModel", pantrySchema);
 
 pantryModel.pantryForUser = function (userId) {
-    return pantryModel.find({user:mongoose.Types.ObjectId(userId)});
+    return pantryModel.find({user: mongoose.Types.ObjectId(userId)});
 };
 
 pantryModel.updatePantry = function (pantryId, pantry) {
-    return pantryModel.findByIdAndUpdate(pantryId, {$set:pantry});
+    return pantryModel.findByIdAndUpdate(pantryId, {$set: pantry});
 };
 
 pantryModel.addPantryForUser = function (userId, pantry) {

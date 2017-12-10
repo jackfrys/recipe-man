@@ -62,7 +62,7 @@ app.put("/api/recipe/:rid/update", function (req, res) {
 app.post("/api/:rid/share/:uid", function (req, res) {
     recipeModel.findById(req.params.rid).then(function (data) {
         data.shared.push(req.params.uid);
-        recipeModel.findByIdAndUpdate(req.params.rid, {$set:data}).then(function () {
+        recipeModel.findByIdAndUpdate(req.params.rid, {$set: data}).then(function () {
             res.send(200);
         }).catch(function () {
             res.sendStatus(400);
@@ -118,10 +118,10 @@ app.get("/api/recipe/:rid/complete/:pid", function (req, res) {
             for (var i in recipe.ingredients.toObject()) {
                 var ing = recipe.ingredients[i];
                 if (!allows(ing, pantry.ingredients)) {
-                    res.json({allows:false});
+                    res.json({allows: false});
                 }
             }
-            res.json({allows:true});
+            res.json({allows: true});
         }).catch(function (err) {
             var e = err;
         });

@@ -11,6 +11,7 @@
                 vm.recipes = recipes.data;
             });
         }
+
         init();
 
         vm.remove = function (index) {

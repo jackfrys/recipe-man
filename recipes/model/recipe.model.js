@@ -9,19 +9,19 @@ recipeModel.createRecipe = function (userId, recipe) {
 };
 
 recipeModel.recipesByUser = function (userId) {
-    return recipeModel.find({user:mongoose.Types.ObjectId(userId)});
+    return recipeModel.find({user: mongoose.Types.ObjectId(userId)});
 };
 
 recipeModel.sharedWithUser = function (userId) {
-    return recipeModel.find({shared:userId});
+    return recipeModel.find({shared: userId});
 };
 
 recipeModel.updateRecipe = function (recipeId, recipe) {
-    return recipeModel.findByIdAndUpdate(recipeId, {$set:recipe});
+    return recipeModel.findByIdAndUpdate(recipeId, {$set: recipe});
 };
 
 recipeModel.shareRecipe = function (recipeId, userId) {
-    return recipeModel.findByIdAndUpdate(recipeId, {$push:{shared:mongoose.Types.ObjectId(userId)}});
+    return recipeModel.findByIdAndUpdate(recipeId, {$push: {shared: mongoose.Types.ObjectId(userId)}});
 };
 
 recipeModel.deleteRecipe = function (recipeId) {
@@ -29,11 +29,11 @@ recipeModel.deleteRecipe = function (recipeId) {
 };
 
 recipeModel.addCategory = function (recipeId, categoryId) {
-    return recipeModel.findByIdAndUpdate(recipeId, {$push:{categories:categoryId}});
+    return recipeModel.findByIdAndUpdate(recipeId, {$push: {categories: categoryId}});
 };
 
 recipeModel.removeCategory = function (recipeId, categoryId) {
-    return recipeModel.findByIdAndUpdate(recipeId, {$pullAll:{categories:categoryId}});
+    return recipeModel.findByIdAndUpdate(recipeId, {$pullAll: {categories: categoryId}});
 };
 
 recipeModel.allRecipes = function () {
