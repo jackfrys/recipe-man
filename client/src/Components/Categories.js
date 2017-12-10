@@ -46,7 +46,7 @@ class Category extends Component {
     }
 
     componentDidMount() {
-        fetch(`https://recipe-man-db.herokuapp.com/api/categories`)
+        fetch(`/api/categories`)
             .then(results => {
                 return results.json();
             }).then(data => {

@@ -30,7 +30,7 @@ class Login extends Component {
     }
 
     login() {
-        var loginUrl = `https://recipe-man-db.herokuapp.com/api/user/${this.state.username}/${this.state.password}`;
+        var loginUrl = `/api/user/${this.state.username}/${this.state.password}`;
 
         fetch(loginUrl).then(results => {
             return results.json();

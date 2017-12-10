@@ -32,7 +32,7 @@ constructor(props) {
   handleSaveAndClose = () => {
 
     if (this.state.inputValue.trim() !== '') {
-        fetch(`https://recipe-man-db.herokuapp.com/api/category/create`, {
+        fetch(`/api/category/create`, {
             method: 'POST',
             headers: {
             'Accept': 'application/json',

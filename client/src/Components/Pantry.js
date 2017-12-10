@@ -35,7 +35,7 @@ class Pantry extends Component {
     }
 
     componentDidMount() {
-        fetch(`https://recipe-man-db.herokuapp.com/api/${this.props.userID}/pantry`)
+        fetch(`/api/${this.props.userID}/pantry`)
             .then(results => {
                 return results.json();
             }).then(data => {
@@ -63,7 +63,7 @@ class Pantry extends Component {
     }
 
     updatePantry() {
-        fetch(`https://recipe-man-db.herokuapp.com/api/${this.state.pantry._id}/update`, {
+        fetch(`/api/${this.state.pantry._id}/update`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

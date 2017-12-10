@@ -67,7 +67,7 @@ export default class NewRecipeModal extends React.Component {
 
         for (let x = 0; x < this.state.categories.length; x++) {
             if (this.state.categories[x].trim() !== '') {
-                fetch(`https://recipe-man-db.herokuapp.com/api/category/create`, {
+                fetch(`/api/category/create`, {
                     method: 'POST',
                     headers: {
                     'Accept': 'application/json',
@@ -90,7 +90,7 @@ export default class NewRecipeModal extends React.Component {
             categories: categoryIDs
         })
 
-        fetch(`https://recipe-man-db.herokuapp.com/api/${this.props.userID}/recipe/create`, {
+        fetch(`/api/${this.props.userID}/recipe/create`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

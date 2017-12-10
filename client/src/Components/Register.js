@@ -46,7 +46,7 @@ class Register extends Component {
     }
 
     signup() {
-        var loginUrl = `https://recipe-man-db.herokuapp.com/api/user/create`;
+        var loginUrl = `/api/user/create`;
 
         fetch(loginUrl, {
             method: 'POST',

@@ -38,7 +38,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        fetch(`https://recipe-man-db.herokuapp.com/api/${this.props.match.params.id}/recipes`)
+        fetch(`/api/${this.props.match.params.id}/recipes`)
             .then(results => {
                 return results.json();
             }).then(data => {
@@ -48,7 +48,7 @@ class Home extends Component {
             });
         });
 
-        fetch(`https://recipe-man-db.herokuapp.com/api/${this.props.match.params.id}/shared`)
+        fetch(`/api/${this.props.match.params.id}/shared`)
             .then(results => {
                 return results.json();
             }).then(data => {
@@ -60,7 +60,7 @@ class Home extends Component {
             });
         });
 
-        fetch(`https://recipe-man-db.herokuapp.com/api/${this.props.match.params.id}/pantry`)
+        fetch(`/api/${this.props.match.params.id}/pantry`)
             .then(results => {
                 return results.json();
             }).then(data => {
@@ -73,7 +73,7 @@ class Home extends Component {
 
     pushRecipeToServer(recipeIdx) {
 
-        fetch(`https://recipe-man-db.herokuapp.com/api/recipe/${this.state.recipes[recipeIdx]._id}/update`, {
+        fetch(`/api/recipe/${this.state.recipes[recipeIdx]._id}/update`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -100,7 +100,7 @@ class Home extends Component {
         this.setState({
             recipes: newRecipes
         });
-        fetch(`https://recipe-man-db.herokuapp.com/api/${this.state.recipes[idx]._id}`, {
+        fetch(`/api/${this.state.recipes[idx]._id}`, {
             method: "DELETE"
         })
 
