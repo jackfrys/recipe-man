@@ -1,12 +1,11 @@
 var app = require('./express');
 
 var bodyParser = require('body-parser');
-const path = require('path');
 
 var express = app.express;
 
 app.use(express.static(__dirname + '/public'));
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(__dirname + '/client/build'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -14,7 +13,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 require("./recipes/app")(app);
 
 app.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname + '/client/build/index.html'));
+    res.sendFile(__dirname + '/client/build/index.html');
 });
 
 port = process.env.PORT || 5000;
