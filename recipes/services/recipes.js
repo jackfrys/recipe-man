@@ -45,7 +45,7 @@ app.post("/api/:uid/recipe/create", function (req, res) {
 
 app.delete("/api/:rid", function (req, res) {
     recipeModel.deleteRecipe(req.params.rid).then(function () {
-        res.send(200);
+        res.sendStatus(200);
     }).catch(function () {
         res.sendStatus(400);
     });
@@ -53,7 +53,7 @@ app.delete("/api/:rid", function (req, res) {
 
 app.put("/api/recipe/:rid/update", function (req, res) {
     recipeModel.updateRecipe(req.params.rid, req.body).then(function () {
-        res.send(200);
+        res.sendStatus(200);
     }).catch(function () {
         res.sendStatus(400);
     });
@@ -63,7 +63,7 @@ app.post("/api/:rid/share/:uid", function (req, res) {
     recipeModel.findById(req.params.rid).then(function (data) {
         data.shared.push(req.params.uid);
         recipeModel.findByIdAndUpdate(req.params.rid, {$set: data}).then(function () {
-            res.send(200);
+            res.sendStatus(200);
         }).catch(function () {
             res.sendStatus(400);
         });
@@ -74,15 +74,15 @@ app.post("/api/:rid/share/:uid", function (req, res) {
 
 app.put("/api/:rid/category/:cid", function (req, res) {
     recipeModel.addCategory(req.params.rid, req.params.cid).then(function () {
-        res.send(200);
+        res.sendStatus(200);
     }).catch(function () {
-        res.send(400);
+        res.sendStatus(400);
     });
 });
 
 app.delete("/api/:rid/category/:cid", function (req, res) {
     recipeModel.removeCategory(req.params.rid, req.params.cid).then(function () {
-        res.send(200);
+        res.sendStatus(200);
     }).catch(function () {
         res.sendStatus(400);
     });

@@ -18,13 +18,13 @@ app.get("/api/category/:cid", function (req, res) {
 
 app.put("/api/category/:cid/modify", function (req, res) {
     categoryModel.modifyCategory(req.params.cid, req.body).then(function () {
-        res.send(200);
+        res.sendStatus(200);
     });
 });
 
 app.delete("/api/category/:cid", function (req, res) {
     categoryModel.deleteCategory(req.params.cid).then(function () {
-        res.send(200);
+        res.sendStatus(200);
     });
 });
 
