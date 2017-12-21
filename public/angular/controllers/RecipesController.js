@@ -15,7 +15,7 @@
         init();
 
         vm.remove = function (index) {
-            $http.delete("/api/" + vm.recipes[index]._id);
+            $http.delete("/api/recipe/" + vm.recipes[index]._id);
             vm.recipes.splice(index, 1);
         };
 

@@ -90,7 +90,7 @@ export default class NewRecipeModal extends React.Component {
             categories: categoryIDs
         })
 
-        fetch(`/api/${this.props.userID}/recipe/create`, {
+        fetch(`/api/user/${this.props.userID}/recipe`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

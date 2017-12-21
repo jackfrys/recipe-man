@@ -100,7 +100,7 @@ class Home extends Component {
         this.setState({
             recipes: newRecipes
         });
-        fetch(`/api/${this.state.recipes[idx]._id}`, {
+        fetch(`/api/recipe/${this.state.recipes[idx]._id}`, {
             method: "DELETE"
         })
 

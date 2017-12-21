@@ -42,7 +42,7 @@
 
         vm.addRecipe = function (index) {
             $http.put("/api/user/" + vm.users[index]._id, vm.users[index]).then(function () {
-                $http.post("/api/" + vm.users[index]._id + "/recipe/create");
+                $http.post("/api/user/" + vm.users[index]._id + "/recipe");
             });
         };
     }

@@ -35,7 +35,7 @@ app.get("/api/recipecat/:rid", function (req, res) {
     });
 });
 
-app.post("/api/:uid/recipe/create", function (req, res) {
+app.post("/api/user/:uid/recipe", function (req, res) {
     recipeModel.createRecipe(req.params.uid, req.body).then(function (data) {
         res.json(data);
     }).catch(function (err) {
@@ -43,7 +43,7 @@ app.post("/api/:uid/recipe/create", function (req, res) {
     });
 });
 
-app.delete("/api/:rid", function (req, res) {
+app.delete("/api/recipe/:rid", function (req, res) {
     recipeModel.deleteRecipe(req.params.rid).then(function () {
         res.sendStatus(200);
     }).catch(function () {
