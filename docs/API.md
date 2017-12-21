@@ -37,9 +37,9 @@
 
 * GET all categories: `/api/categories`
 * GET category by id: `/api/category/<categoryId>`
-* PUT change to category by id and body object: `/api/category/<categoryId>/modify`
+* PUT change to category by id and body object: `/api/category/<categoryId>`
 * DELETE category: `/api/category/<categoryId>`
-* POST a new category from body object: `/api/category/create`
+* POST a new category from body object: `/api/category`
 
 ### Fields
 * name: String

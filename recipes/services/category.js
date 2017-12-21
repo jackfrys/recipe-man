@@ -16,7 +16,7 @@ app.get("/api/category/:cid", function (req, res) {
     });
 });
 
-app.put("/api/category/:cid/modify", function (req, res) {
+app.put("/api/category/:cid", function (req, res) {
     categoryModel.modifyCategory(req.params.cid, req.body).then(function () {
         res.sendStatus(200);
     });
@@ -28,7 +28,7 @@ app.delete("/api/category/:cid", function (req, res) {
     });
 });
 
-app.post("/api/category/create", function (req, res) {
+app.post("/api/category", function (req, res) {
     categoryModel.createCategory(req.body).then(function (data) {
         res.json(data);
     });

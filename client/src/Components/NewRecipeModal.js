@@ -67,7 +67,7 @@ export default class NewRecipeModal extends React.Component {
 
         for (let x = 0; x < this.state.categories.length; x++) {
             if (this.state.categories[x].trim() !== '') {
-                fetch(`/api/category/create`, {
+                fetch(`/api/category`, {
                     method: 'POST',
                     headers: {
                     'Accept': 'application/json',

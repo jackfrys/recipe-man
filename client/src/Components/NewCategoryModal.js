@@ -32,7 +32,7 @@ constructor(props) {
   handleSaveAndClose = () => {
 
     if (this.state.inputValue.trim() !== '') {
-        fetch(`/api/category/create`, {
+        fetch(`/api/category`, {
             method: 'POST',
             headers: {
             'Accept': 'application/json',

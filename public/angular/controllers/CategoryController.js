@@ -22,9 +22,9 @@
         vm.update = function (index) {
             var category = vm.categories[index];
             if (category.hasOwnProperty("_id")) {
-                $http.put("/api/category/" + category._id + "/modify", category);
+                $http.put("/api/category/" + category._id, category);
             } else {
-                $http.post("/api/category/create", category).then(function (category) {
+                $http.post("/api/category", category).then(function (category) {
                     vm.categories[index] = category.data;
                 });
             }
