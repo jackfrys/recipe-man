@@ -49,7 +49,7 @@
 
 * GET pantry for user: `/api/<userId>/pantry`
 * POST new pantry for user from body object: `/api/<userId>/pantry/add`
-* PUT pantry by id from body object: `/api/<pantryId>/update`
+* PUT pantry by id from body object: `/api/pantry/<pantryId>`
 
 ### Fields
 * name: String

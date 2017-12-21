@@ -16,7 +16,7 @@
         init();
 
         vm.update = function () {
-            $http.put("/api/" + id + "/update", vm.pantry).then(function () {
+            $http.put("/api/pantry/" + id, vm.pantry).then(function () {
                 init();
             });
         };

@@ -63,7 +63,7 @@ class Pantry extends Component {
     }
 
     updatePantry() {
-        fetch(`/api/${this.state.pantry._id}/update`, {
+        fetch(`/api/pantry/${this.state.pantry._id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"

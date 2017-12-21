@@ -18,7 +18,7 @@ app.post("/api/:uid/pantry/add", function (req, res) {
     });
 });
 
-app.put("/api/:pid/update", function (req, res) {
+app.put("/api/pantry/:pid", function (req, res) {
     pantryModel.updatePantry(req.params.pid, req.body).then(function () {
         res.send(200);
     }).catch(function () {

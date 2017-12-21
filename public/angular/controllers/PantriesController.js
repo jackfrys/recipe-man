@@ -25,7 +25,7 @@
         vm.update = function (index) {
             var pantry = vm.pantries[index];
             if (pantry.hasOwnProperty("_id")) {
-                $http.put("/api/" + pantry._id + "/update", pantry);
+                $http.put("/api/pantry/" + pantry._id, pantry);
             }
         };
 
