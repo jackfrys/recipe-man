@@ -11,7 +11,7 @@ app.get("/api/user/:uid", function (req, res) {
     });
 });
 
-app.post("/api/user/create", function (req, res) {
+app.post("/api/user/", function (req, res) {
     var user = req.body;
     userModel.findByCredentials(user.username, user.password).then(function (data) {
         if (data.length === 0) {
@@ -36,7 +36,7 @@ app.delete("/api/user/:uid", function (req, res) {
     });
 });
 
-app.put("/api/user/:uid/update", function (req, res) {
+app.put("/api/user/:uid", function (req, res) {
     userModel.updateUser(req.params.uid, req.body).then(function () {
         res.sendStatus(200);
     }).catch(function () {

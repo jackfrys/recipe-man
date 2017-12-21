@@ -46,7 +46,7 @@ class Register extends Component {
     }
 
     signup() {
-        var loginUrl = `/api/user/create`;
+        var loginUrl = `/api/user/`;
 
         fetch(loginUrl, {
             method: 'POST',
