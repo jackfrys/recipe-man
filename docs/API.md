@@ -14,8 +14,8 @@
 
 ## Recipes
 
-* GET recipes owned by user: `/api/<userId>/recipes`
-* GET recipes shared with user: `/api/<userId>/shared`
+* GET recipes owned by user: `/api/user/<userId>/recipes`
+* GET recipes shared with user: `/api/user/<userId>/shared`
 * GET recipe by id: `/api/recipe/<recipeId>`
 * POST new recipe for user from body object: `/api/<userId>/recipe/create`
 * DELETE recipe by id: `/api/<recipeId>`

@@ -3,7 +3,7 @@ var mongoose = require("mongoose");
 var recipeModel = require("../model/recipe.model");
 var pantryModel = require("../model/pantry.model");
 
-app.get("/api/:uid/recipes", function (req, res) {
+app.get("/api/user/:uid/recipes", function (req, res) {
     recipeModel.find({user: mongoose.Types.ObjectId(req.params.uid)}).populate("categories").then(function (data) {
         res.json(data);
     }).catch(function () {
@@ -11,7 +11,7 @@ app.get("/api/:uid/recipes", function (req, res) {
     });
 });
 
-app.get("/api/:uid/shared", function (req, res) {
+app.get("/api/user/:uid/shared", function (req, res) {
     recipeModel.find({shared: req.params.uid}).populate("categories").then(function (data) {
         res.json(data);
     }).catch(function () {

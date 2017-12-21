@@ -38,7 +38,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        fetch(`/api/${this.props.match.params.id}/recipes`)
+        fetch(`/api/user/${this.props.match.params.id}/recipes`)
             .then(results => {
                 return results.json();
             }).then(data => {
@@ -48,7 +48,7 @@ class Home extends Component {
             });
         });
 
-        fetch(`/api/${this.props.match.params.id}/shared`)
+        fetch(`/api/user/${this.props.match.params.id}/shared`)
             .then(results => {
                 return results.json();
             }).then(data => {
