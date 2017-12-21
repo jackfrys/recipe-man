@@ -2,6 +2,12 @@ import React, {Component} from 'react';
 import {FormControl} from 'react-bootstrap';
 import '../css/App.css';
 import {Redirect } from 'react-router'
+import RaisedButton from 'material-ui/RaisedButton';
+
+
+const style = {
+  margin: 15,
+};
 
 
 class Register extends Component {
@@ -106,9 +112,9 @@ class Register extends Component {
                         onChange={this.handleEmailChange}
                     />
                 </form>
-                <button onClick={this.signup.bind(this)}>
+                <RaisedButton style={style} onClick={this.signup.bind(this)}>
                     Register
-                </button>
+                </RaisedButton>
             </div>
         );
     }

@@ -2,6 +2,13 @@ import React, {Component} from 'react';
 import {FormControl} from 'react-bootstrap';
 import '../css/App.css';
 import {Redirect } from 'react-router'
+import { Route } from 'react-router-dom'
+import RaisedButton from 'material-ui/RaisedButton';
+
+const style = {
+  margin: 15,
+};
+
 
 
 class Login extends Component {
@@ -73,9 +80,16 @@ class Login extends Component {
                         onChange={this.handlePasswordChange}
                     />
                 </form>
-                <button onClick={this.login.bind(this)}>
+                <RaisedButton style={style} onClick={this.login.bind(this)}>
                     Login
-                </button>
+                </RaisedButton>
+                <Route render={({ history}) => (
+                    <RaisedButton style={style}
+                    onClick={() => { history.push('/register') }}
+                    >
+                            Register
+                    </RaisedButton>
+                )} />
             </div>
         );
     }
