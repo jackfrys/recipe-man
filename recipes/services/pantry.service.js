@@ -1,6 +1,6 @@
 var app = require("../../express");
 var mongoose = require("mongoose");
-var pantryModel = require("../model/pantry.model");
+var pantryModel = require("../database/model/pantry.model");
 
 app.get("/api/:uid/pantry", function (req, res) {
     pantryModel.pantryForUser(req.params.uid).then(function (data) {

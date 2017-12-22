@@ -1,6 +1,6 @@
 var app = require("../../express");
 var mongoose = require("mongoose");
-var categoryModel = require("../model/category.model");
+var categoryModel = require("../database/model/category.model");
 
 app.get("/api/categories", function (req, res) {
     categoryModel.allCategories().then(function (data) {

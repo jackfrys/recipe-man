@@ -1,7 +1,7 @@
 var app = require("../../express");
 var mongoose = require("mongoose");
-var recipeModel = require("../model/recipe.model");
-var pantryModel = require("../model/pantry.model");
+var recipeModel = require("../database/model/recipe.model");
+var pantryModel = require("../database/model/pantry.model");
 
 app.get("/api/user/:uid/recipes", function (req, res) {
     recipeModel.recipesByUser(req.params.uid).then(function (data) {

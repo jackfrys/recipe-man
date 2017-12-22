@@ -1,7 +1,7 @@
 var app = require("../../express");
 var mongoose = require("mongoose");
-var userModel = require("../model/user.model");
-var pantryModel = require("../model/pantry.model");
+var userModel = require("../database/model/user.model");
+var pantryModel = require("../database/model/pantry.model");
 
 app.get("/api/user/:uid", function (req, res) {
     userModel.getUser(req.params.uid).then(function (data) {
