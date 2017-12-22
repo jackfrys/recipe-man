@@ -10,7 +10,7 @@ app.use(express.static(__dirname + '/client/build'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-require("./recipes/app")(app);
+require("./recipe-man/app")(app);
 
 app.get('*', function (req, res) {
     res.sendFile(__dirname + '/client/build/index.html');
