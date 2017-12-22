@@ -9,7 +9,7 @@ var pantrySchema = mongoose.Schema({
         type: [{
             name: {type: String, default: ""},
             quantity: {type: String, default: 0},
-            unit: {type: String, default: 0}
+            unit: {type: String, default: ""}
         }],
         default: []
     }
