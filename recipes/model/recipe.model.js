@@ -9,11 +9,15 @@ recipeModel.createRecipe = function (userId, recipe) {
 };
 
 recipeModel.recipesByUser = function (userId) {
-    return recipeModel.find({user: mongoose.Types.ObjectId(userId)});
+    return recipeModel.find({user: mongoose.Types.ObjectId(req.params.uid)}).populate("categories");
 };
 
 recipeModel.sharedWithUser = function (userId) {
-    return recipeModel.find({shared: userId});
+    return recipeModel.find({shared: userId}).populate("categories");
+};
+
+recipeModel.recipeById = function (recipeId) {
+    return recipeModel.findById(recipeId).populate("categories").populate("shared");
 };
 
 recipeModel.updateRecipe = function (recipeId, recipe) {

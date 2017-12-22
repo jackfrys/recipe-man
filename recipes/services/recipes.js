@@ -4,7 +4,7 @@ var recipeModel = require("../model/recipe.model");
 var pantryModel = require("../model/pantry.model");
 
 app.get("/api/user/:uid/recipes", function (req, res) {
-    recipeModel.find({user: mongoose.Types.ObjectId(req.params.uid)}).populate("categories").then(function (data) {
+    recipeModel.recipesByUser(req.params.uid).then(function (data) {
         res.json(data);
     }).catch(function () {
         res.sendStatus(400);
@@ -12,7 +12,7 @@ app.get("/api/user/:uid/recipes", function (req, res) {
 });
 
 app.get("/api/user/:uid/shared", function (req, res) {
-    recipeModel.find({shared: req.params.uid}).populate("categories").then(function (data) {
+    recipeModel.sharedWithUser(req.params.uid).then(function (data) {
         res.json(data);
     }).catch(function () {
         res.sendStatus(400);
@@ -20,15 +20,7 @@ app.get("/api/user/:uid/shared", function (req, res) {
 });
 
 app.get("/api/recipe/:rid", function (req, res) {
-    recipeModel.findById(req.params.rid).then(function (data) {
-        res.json(data);
-    }).catch(function () {
-        res.sendStatus(400);
-    });
-});
-
-app.get("/api/recipecat/:rid", function (req, res) {
-    recipeModel.findById(req.params.rid).populate("categories").populate("shared").then(function (data) {
+    recipeModel.recipeById(req.params.rid).then(function (data) {
         res.json(data);
     }).catch(function () {
         res.sendStatus(400);

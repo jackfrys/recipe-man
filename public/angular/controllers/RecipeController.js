@@ -10,7 +10,7 @@
         vm.newShare = "";
 
         function init() {
-            $http.get("/api/recipecat/" + id).then(function (res) {
+            $http.get("/api/recipe/" + id).then(function (res) {
                 vm.recipe = res.data;
                 vm.recipe.steps = vm.recipe.steps.map(function (t) {
                     return {description: t};
