@@ -37,7 +37,7 @@ recipeModel.removeCategory = function (recipeId, categoryId) {
 };
 
 recipeModel.allRecipes = function () {
-    return recipeModel.find({});
+    return recipeModel.find({}).populate("user");
 };
 
 module.exports = recipeModel;
