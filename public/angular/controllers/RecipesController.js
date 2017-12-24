@@ -7,7 +7,7 @@
         var vm = this;
 
         function init() {
-            $http.get("/api/recipes/users").then(function (recipes) {
+            $http.get("/api/recipes").then(function (recipes) {
                 vm.recipes = recipes.data;
             });
         }
