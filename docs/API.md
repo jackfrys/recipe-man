@@ -4,7 +4,7 @@
 * POST new user from body object: `/api/user/`
 * DELETE user by id: `/api/user/<userId>`
 * PUT changes to user by id from body object: `/api/user/<userId>`
-* GET user by credentials: `/api/user/<username>/<password>`
+* GET user by credentials: `/api/login/<username>/<password>`
 
 ### Fields
 * email: String

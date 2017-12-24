@@ -37,7 +37,7 @@ class Login extends Component {
     }
 
     login() {
-        var loginUrl = `/api/user/${this.state.username}/${this.state.password}`;
+        var loginUrl = `/api/login/${this.state.username}/${this.state.password}`;
 
         fetch(loginUrl).then(results => {
             return results.json();

@@ -44,7 +44,7 @@ app.put("/api/user/:uid", function (req, res) {
     });
 });
 
-app.get("/api/user/:un/:pw", function (req, res) {
+app.get("/api/login/:un/:pw", function (req, res) {
     userModel.findByCredentials(req.params.un, req.params.pw).then(function (data) {
         res.json(data);
     }).catch(function () {
