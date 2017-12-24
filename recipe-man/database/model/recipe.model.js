@@ -9,11 +9,11 @@ recipeModel.createRecipe = function (userId, recipe) {
 };
 
 recipeModel.recipesByUser = function (userId) {
-    return recipeModel.find({user: mongoose.Types.ObjectId(req.params.uid)}).populate("categories");
+    return recipeModel.find({user: mongoose.Types.ObjectId(userId)}).populate("categories");
 };
 
 recipeModel.sharedWithUser = function (userId) {
-    return recipeModel.find({shared: userId}).populate("categories");
+    return recipeModel.find({shared: mongoose.Types.ObjectId(userId)}).populate("categories");
 };
 
 recipeModel.recipeById = function (recipeId) {
@@ -33,11 +33,11 @@ recipeModel.deleteRecipe = function (recipeId) {
 };
 
 recipeModel.addCategory = function (recipeId, categoryId) {
-    return recipeModel.findByIdAndUpdate(recipeId, {$push: {categories: categoryId}});
+    return recipeModel.findByIdAndUpdate(recipeId, {$push: {categories: mongoose.Types.ObjectId(categoryId)}});
 };
 
 recipeModel.removeCategory = function (recipeId, categoryId) {
-    return recipeModel.findByIdAndUpdate(recipeId, {$pullAll: {categories: categoryId}});
+    return recipeModel.findByIdAndUpdate(recipeId, {$pullAll: {categories: mongoose.Types.ObjectId(categoryId)}});
 };
 
 recipeModel.allRecipes = function () {
