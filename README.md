@@ -12,7 +12,7 @@ Make sure an instance of `mongod` is running as well. You can install mongoDB us
 ## Editing all objects
 The admin view can be accessed in the backend repo in the `angular` subdirectory. It provides a simple Angular-based UI for editing all objects. You must log in with an admin account - `admin:admin`.
 
-The Heroku-based admin view is [here](https://recipe-man-db.herokuapp.com/angular/#!/).
+The Heroku-based admin view is [here](http://recipeman.jackfrysinger.com/angular/#!/).
 
 ## Database checks
 * only one user per username: added `unique` attribute to field
