@@ -4,11 +4,11 @@
   "description": "CS3200 Database Design project",
   "main": "server.js",
   "dependencies": {
-    "body-parser": "^1.18.2",
+    "body-parser": "^1.18.3",
     "express": "^4.16.3",
-    "mongoose": "^4.13.12",
+    "mongoose": "^4.13.14",
     "q": "^1.5.1",
-    "request": "^2.85.0"
+    "request": "^2.87.0"
   },
   "devDependencies": {},
   "scripts": {
