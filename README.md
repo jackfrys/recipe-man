@@ -1,11 +1,13 @@
 # Recipe Man
 
-* `npm install`
-* `cd client`
-* `npm install`
-* `npm run build`
-* `cd ..`
-* `npm start`
+```
+$ npm install
+$ cd client
+$ npm install
+$ npm run build
+$ cd ..
+$ npm start
+```
 
 Make sure an instance of `mongod` is running as well. You can install mongoDB using Homebrew.
 
