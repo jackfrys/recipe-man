@@ -5,7 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "express": "^4.16.3",
+    "express": "^4.16.4",
     "mongoose": "^4.13.17",
     "q": "^1.5.1",
     "request": "^2.88.0"
